@@ -4,9 +4,9 @@ const {
     getTasks,
     filterTasks,
     getTaskDetails,
-    addCommentToTask
+    addCommentToTask,
+    getEventsByCreator
 } = require("../controllers/createdEventController");
-const authenticateUser = require("../middleware/authenticateUser");
 const router = express.Router();
 
 // Route to get all tasks
@@ -14,6 +14,8 @@ router.get("/",getTasks);
 
 // Route to filter tasks by status or assignee
 router.get("/filter", filterTasks);
+
+router.get("/created-events", getEventsByCreator);
 
 // Route to get task details by ID
 router.get("/:id",getTaskDetails);

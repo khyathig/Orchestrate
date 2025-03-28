@@ -1,5 +1,6 @@
 const Task = require("../models/Task");
 const Employee = require("../models/Employee");
+const Event = require("../models/Event");
 
 // Get tasks assigned to the creator
 exports.getTasks = async (req, res) => {
@@ -115,3 +116,38 @@ exports.addCommentToTask = async (req, res) => {
   }
 };
 
+exports.getEventsByCreator = async (req, res) => {
+  try {
+    const userEmail = req.headers["user-email"];
+    console.log("Received request to fetch events for email:", userEmail);
+
+    if (!userEmail) {
+      console.error("Error: User email is missing in headers");
+      return res.status(400).json({ message: "User email is required in headers" });
+    }
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    console.log(`Fetching events for ${userEmail}, Page: ${page}, Limit: ${limit}`);
+
+    // Fetch event IDs and event names where the creator matches the user's email
+    const events = await Event.find({ creator: userEmail })
+      .select("_id eventName") // Selecting event ID and event name
+      .sort({ date: 1 })
+      .skip(skip)
+      .limit(limit);
+
+    if (!events.length) {
+      return res.status(404).json({ message: "No events found for this creator" });
+    }
+
+    console.log("Fetched Events:", events);
+
+    res.status(200).json(events);
+  } catch (error) {
+    console.error("Error fetching events:", error.message);
+    res.status(500).json({ message: "Error fetching events: " + error.message });
+  }
+};

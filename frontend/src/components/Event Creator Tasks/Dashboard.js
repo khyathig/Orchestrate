@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+/*import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { TaskContext } from './TaskContext';
 import TaskCard from './TaskCard';
 import '../../styles/Dashboard.css';
@@ -36,7 +36,7 @@ const Dashboard = () => {
       <h1>Manage Your Events</h1>
 
       <div className="filters">
-        {/* Search Input */}
+        {/* Search Input }
         <label htmlFor="search">Search by Event Name:</label>
         <input
           id="search"
@@ -46,7 +46,7 @@ const Dashboard = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        {/* Status Filter */}
+        {/* Status Filter }
         <label htmlFor="statusFilter">Filter by Status:</label>
         <select
           id="statusFilter"
@@ -59,7 +59,7 @@ const Dashboard = () => {
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
         </select>
-        {/* Event Filter */}
+        {/* Event Filter }
         <label htmlFor="eventFilter">Filter by Event:</label>
         <select
           id="eventFilter"
@@ -83,6 +83,82 @@ const Dashboard = () => {
       </div>
     </div>
   );
+};
+
+export default Dashboard;*/
+
+import React, { useState, useEffect, useContext } from "react";
+import { TaskContext } from "./TaskContext";
+import { EventContext } from "./EventContext";
+import { useNavigate } from "react-router-dom"; // Import for navigation
+import TaskCard from "./TaskCard";
+import "../../styles/Dashboard.css";
+
+const Dashboard = () => {
+    const { tasks, loadTasks, loading: taskLoading } = useContext(TaskContext);
+    const { events, loadEvents, loading: eventLoading } = useContext(EventContext);
+    const navigate = useNavigate(); // Hook for navigation
+
+    const [activeSection, setActiveSection] = useState("tasks"); // Default open section
+
+    useEffect(() => {
+        loadTasks();
+        loadEvents();
+    }, [loadTasks, loadEvents]);
+
+    return (
+        <div className="dashboard-container">
+            {/* Sidebar */}
+            <aside className="sidebar">
+                <button 
+                    className={activeSection === "tasks" ? "active" : ""}
+                    onClick={() => setActiveSection("tasks")}
+                >
+                    Tasks Assigned
+                </button>
+                <button 
+                    className={activeSection === "events" ? "active" : ""}
+                    onClick={() => setActiveSection("events")}
+                >
+                    Events Created
+                </button>
+            </aside>
+
+            {/* Main Content */}
+            <div className="main-content">
+                {activeSection === "tasks" ? (
+                    <div className="section">
+                        <h2>Tasks Assigned</h2>
+                        {taskLoading ? <p>Loading tasks...</p> : (
+                            <div className="task-list">
+                                {tasks.map(task => (
+                                    <TaskCard 
+                                        key={task._id} 
+                                        task={task} 
+                                        onClick={() => navigate(`/task/${task._id}`)} // Navigate to task details
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className="section">
+                        <h2>Events Created</h2>
+                        {eventLoading ? <p>Loading events...</p> : (
+                            <div className="event-list">
+                                {events.map(event => (
+                                    <div key={event._id} className="event-card">
+                                        <h3>{event.eventName}</h3>
+                                        <button onClick={() => navigate(`/event/${event._id}`)}>View Tasks</button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default Dashboard;

@@ -1,4 +1,3 @@
-// context/TaskContext.js
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { fetchTasks, fetchTaskById } from './taskService';
 
@@ -10,36 +9,37 @@ export const TaskContextProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const loadTasks = useCallback(async () => {
+    console.log(" loadTasks() called"); 
     setLoading(true);
     try {
       const data = await fetchTasks();
+      console.log(" Tasks fetched successfully:", data);
       setTasks(data);
-      console.log("Fetched tasks successfully:", data);
     } catch (error) {
-      console.error('Error loading tasks:', error);
+      console.error(" Error loading tasks:", error);
       setError(error.message);
     } finally {
       setLoading(false);
     }
-  }, []); // No dependencies needed since fetchTasks is a fixed function
+  }, []); // Removed 'loading' from dependency array
 
-  //  Monitor tasks for changes
   useEffect(() => {
-    console.log("Tasks updated:", tasks);
-  }, [tasks])
+    console.log(" Tasks updated:", tasks);
+  }, [tasks]);
 
-  // Fetch task details by ID
   const getTaskById = async (id) => {
     try {
+      console.log(` Fetching task with ID: ${id}`);
       const task = await fetchTaskById(id);
       return task;
     } catch (error) {
-      console.error('Error fetching task:', error);
+      console.error(" Error fetching task:", error);
       throw error;
     }
   };
 
   useEffect(() => {
+    console.log(" Initializing TaskContext, calling loadTasks()");
     loadTasks();
   }, [loadTasks]);
 

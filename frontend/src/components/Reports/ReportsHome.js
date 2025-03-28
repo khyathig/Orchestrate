@@ -88,6 +88,12 @@ const ReportsHome = () => {
     setEventTypeDistribution(Object.entries(eventTypeDist).map(([type, count]) => ({ type, count })));
     setBudgetByType(Object.entries(budgetByEventType).map(([type, budget]) => ({ type, budget })));
     setBudgetByTeam(Object.entries(budgetByTeams).map(([team, budget]) => ({ team, budget })));
+
+    console.log("Events per Year:", eventsPerYear);
+  console.log("Budget per Year:", budgetPerYear);
+  console.log("Event Type Distribution:", eventTypeDist);
+  console.log("Budget by Event Type:", budgetByEventType);
+  console.log("Budget by Team:", budgetByTeams);
   }, [reportData]);
 
   const pieOptions = {
@@ -166,9 +172,10 @@ const ReportsHome = () => {
           </table>
           </div>
           
-          {/* Events by Year Graph */}
           <h3>Event Count per Year</h3>
-          <ResponsiveContainer>
+          {console.log("Years:", years)} {/* Log to check years */}
+          {console.log("Event Counts:", eventCounts)} {/* Log to check eventCounts */}
+          <ResponsiveContainer width="100%" height={300}>
             <BarChart data={years.map((year, i) => ({ year, events: eventCounts[i] }))}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" />
