@@ -1,53 +1,60 @@
 /* TaskDetails.css */
 
 .task-details {
-  padding: 10px;
+  padding: 15px;
   font-family: Arial, sans-serif;
-  height: 100px; /* Fixed height */
-  overflow: hidden; /* Prevents content from overflowing */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-  
-  .task-details h1 {
-    font-size: 30px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .task-details p {
-    font-size: 18px;
-    color: #555;
-    line-height: 1.6;
-  }
-  
-  .task-details strong {
-    color: #000;
-  }
-  
-  .status {
-    font-weight: bold;
-    color: green;
-  }
-  
-  .progress {
-    font-weight: bold;
-    color: blue;
-  }
-  
-  .back-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    color: #fff;
-    background: #28a745;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .back-btn:hover {
-    background: #218838;
-  }
-  
-  
+/* Heading */
+.task-details h1 {
+  font-size: 28px;
+  color: #222222;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Paragraph Text */
+.task-details p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Emphasized Text */
+.task-details strong {
+  color: #222222;
+}
+
+/* Status Indicators */
+.status {
+  font-weight: bold;
+  color: #19D86B;
+}
+
+.progress {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background: #19D86B;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.back-btn:hover {
+  background: #17C15F;
+  box-shadow: 0 0 10px rgba(25, 216, 107, 0.5);
+}

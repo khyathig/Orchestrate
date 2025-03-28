@@ -65,18 +65,18 @@ function EventFeed({ loggedInUser }) {
 
   const handleRSVP = async (event) => {
     const token = localStorage.getItem("token");
-  
+
     if (!loggedInUser?.name) {
       alert("Please log in to RSVP.");
       return;
     }
-  
+
     try {
       const isRSVPd = event.attendees.includes(loggedInUser.name);
       const endpoint = isRSVPd 
         ? `http://localhost:5000/api/events/${event._id}/unrsvp`
         : `http://localhost:5000/api/events/${event._id}/rsvp`;
-  
+
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
@@ -85,10 +85,10 @@ function EventFeed({ loggedInUser }) {
         },
         body: JSON.stringify({ employeeName: loggedInUser.name }),
       });
-  
+
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Failed to update RSVP status");
-  
+
       // Update local state to reflect changes
       setEvents((prevEvents) =>
         prevEvents.map((e) =>
@@ -108,7 +108,6 @@ function EventFeed({ loggedInUser }) {
       alert(error.message);
     }
   };
-  
 
   // Ensure event ID matches task eventID (convert both to strings)
   const isEventCompleted = (eventId) => {
@@ -117,43 +116,43 @@ function EventFeed({ loggedInUser }) {
   };
 
   const filteredEvents = events
-  .filter((event) => isEventCompleted(event._id)) // Only show completed events
-  .filter((event) => {
-    const isStarred = starredEvents.has(event._id);
-    const isUserAttendee = event.attendees.some(
-      (attendee) => attendee.toLowerCase() === loggedInUser?.name.toLowerCase()
-    );
+    .filter((event) => isEventCompleted(event._id)) // Only show completed events
+    .filter((event) => {
+      const isStarred = starredEvents.has(event._id);
+      const isUserAttendee = event.attendees.some(
+        (attendee) => attendee.toLowerCase() === loggedInUser?.name.toLowerCase()
+      );
 
-    if (selectedFilter === "RSVP'd") {
-      return isUserAttendee;
-    }
+      if (selectedFilter === "RSVP'd") {
+        return isUserAttendee;
+      }
 
-    if (selectedFilter === "Starred") {
-      return isStarred;
-    }
+      if (selectedFilter === "Starred") {
+        return isStarred;
+      }
 
-    return true; // Show all events by default
-  })
-  .filter((event) =>
-    event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-  .filter(
-    (event) =>
-      selectedYear === "All Years" ||
-      new Date(event.date).getFullYear().toString() === selectedYear
-  )
-  .filter(
-    (event) => selectedEventType === "All Types" || event.eventType === selectedEventType
-  )
-  .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sorting latest events first
+      return true; // Show all events by default
+    })
+    .filter((event) =>
+      event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter(
+      (event) =>
+        selectedYear === "All Years" ||
+        new Date(event.date).getFullYear().toString() === selectedYear
+    )
+    .filter(
+      (event) => selectedEventType === "All Types" || event.eventType === selectedEventType
+    )
+    .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sorting latest events first
+
+  const isEventInPast = (eventDate) => {
+    return new Date(eventDate) < new Date(); // Compare event date with current date
+  };
 
   return (
     <div className="event-feed-container">
-
-      {/* 🔥 Inline Filter & Search Section */}
       <div className="filter-search-inline">
-
-        {/* 🔍 Search Bar */}
         <input
           type="text"
           placeholder="Search events by name..."
@@ -161,8 +160,6 @@ function EventFeed({ loggedInUser }) {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-input"
         />
-
-        {/* Inline Filters beside search bar */}
         <select
           className="filter-dropdown"
           value={selectedFilter}
@@ -172,37 +169,31 @@ function EventFeed({ loggedInUser }) {
           <option value="RSVP'd">RSVP'd</option>
           <option value="Starred">Starred</option>
         </select>
-
         <select
           className="filter-dropdown"
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
         >
           <option value="All Years">All Years</option>
-          {[...new Set(events.map(event => new Date(event.date).getFullYear().toString()))].map(year => (
+          {[...new Set(events.map((event) => new Date(event.date).getFullYear().toString()))].map((year) => (
             <option key={year} value={year}>{year}</option>
           ))}
         </select>
-
         <select
           className="filter-dropdown"
           value={selectedEventType}
           onChange={(e) => setSelectedEventType(e.target.value)}
         >
           <option value="All Types">All Event Types</option>
-          {[...new Set(events.map(event => event.eventType))].map(type => (
+          {[...new Set(events.map((event) => event.eventType))].map((type) => (
             <option key={type} value={type}>{type}</option>
           ))}
         </select>
       </div>
 
-      {/* Upcoming Events Title Above the Events */}
-      <h2 className="section-title">Upcoming Events</h2>
+      <h2 className="section-title">Events</h2>
 
-      {/* Layout Wrapper */}
       <div className="content-wrapper">
-
-        {/* Event Feed */}
         <div className="event-feed">
           <div className="event-list">
             {filteredEvents.length === 0 ? (
@@ -236,27 +227,28 @@ function EventFeed({ loggedInUser }) {
                     </>
                   )}
 
-                    {event.eventType === "limited-entry" ? (
-                    event.ticketPrice > 0 ? (
-                        // If the event requires payment, show the RazorpayButton
+                  {isEventInPast(event.date) ? (
+                    <p className="event-past">This event has already passed.</p>
+                  ) : (
+                    event.eventType === "limited-entry" && (
+                      event.ticketPrice > 0 ? (
                         <RazorpayButton event={event} loggedInUser={loggedInUser} />
-                    ) : (
-                        // If the event is free, show the RSVP button
+                      ) : (
                         <button
-                        className={`rsvp-button ${event.attendees.includes(loggedInUser?.name) ? "rsvped" : ""}`}
-                        onClick={() => handleRSVP(event)}
+                          className={`rsvp-button ${event.attendees.includes(loggedInUser?.name) ? "rsvped" : ""}`}
+                          onClick={() => handleRSVP(event)}
                         >
-                        {event.attendees.includes(loggedInUser?.name) ? "RSVP’d" : "RSVP"}
+                          {event.attendees.includes(loggedInUser?.name) ? "RSVP’d" : "RSVP"}
                         </button>
+                      )
                     )
-                    ) : null}
+                  )}
                 </div>
               ))
             )}
           </div>
         </div>
 
-        {/* 🔔 Notification Panel beside events */}
         <div className="notification-panel">
           <h2>Notifications</h2>
           <NotificationPanel loggedInUser={loggedInUser} />

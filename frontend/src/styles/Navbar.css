@@ -3,16 +3,16 @@
     display: flex;
     justify-content: space-between; /* Logo left, menu right */
     align-items: center;
-    background-color: #333;
-    padding: 15px 20px;
-    color: white;
-    height: 100px; /* Fixed height */
+    background-color: #19D86B;
+    padding: 5px 10px;
+    color: #ffffff;
+    height: 60px; /* Fixed height */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Logo stays on the left */
@@ -38,7 +38,7 @@
     position: absolute;
     top: 60px; /* Below navbar */
     right: 20px; /* Aligns to right */
-    background: white;
+    background: #15B055;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 8px 8px;
     display: none;
@@ -61,7 +61,7 @@
     font-size: 1rem;
     cursor: pointer;
     transition: color 0.3s ease;
-    color: #333;
+    color: #EEEEEE;
     text-decoration: none;
     display: block;
 }
