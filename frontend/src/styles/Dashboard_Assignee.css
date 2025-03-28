@@ -1,61 +1,49 @@
-.task-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Matching width */
-  gap: 24px;
-}
-
-.task-card {
-  background: #F8FCFF; /* Light theme-friendly background */
-  border: 2px solid #CCE7FF; /* Light blue border */
-  border-radius: 12px;
-  padding: 24px;
-  min-height: 250px; /* Taller to fit content */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Filters Section - Only Dropdowns */
+.filters {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-/* Adding the green shadow effect */
-.task-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(25, 216, 107, 0.5); /* Green glow */
+/* Dropdown Styling */
+.filters input, 
+.filters select {
+  padding: 10px 15px;    
+  font-size: 16px;        
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: 0.3s;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 220px;          /* Uniform width */
+  height: 44px;          /* Slightly taller for consistency */
 }
 
-/* Task Title */
-.task-card h3 {
-  font-size: 20px;
-  color: #007EFF; /* Blue Title */
-  margin-bottom: 8px;
+/* Hover & Focus Effects */
+.filters input:hover, 
+.filters select:hover {
+  border-color: #FF7B00; /* Orange border on hover */
 }
 
-/* Task Details */
-.task-card p {
-  font-size: 16px;
-  color: #444;
-  line-height: 1.5;
+.filters input:focus, 
+.filters select:focus {
+  outline: none;
+  border-color: #FF7B00; 
+  box-shadow: 0 0 10px rgba(255, 123, 0, 0.5);
 }
 
-/* View Details Button */
-.view-details {
-  display: inline-block;
-  margin-top: auto;
-  padding: 10px 20px;
-  color: white;
-  background: #19D86B; /* Themed Green */
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  min-width: 150px; /* Keeping same width as before */
-  text-align: center;
-  font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;  
+    gap: 12px;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;            
+  }
 }
 
-.view-details:hover {
-  background: #128B48; /* Darker Green */
-  transform: scale(1.05);
-}

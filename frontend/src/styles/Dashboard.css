@@ -1,6 +1,6 @@
 /* Styling for the dashboard page */
 .dashboard {
-  padding: 40px;
+  padding: 80px;
   font-family: Arial, sans-serif;
   max-width: 1200px;
   margin: 0 auto;
@@ -9,7 +9,7 @@
 /* Heading */
 h1 {
   font-size: 32px;
-  color: #212529;
+  color: #FF7B00;  /* Orange */
   text-align: center;
   margin-bottom: 30px;
   font-weight: 600;
@@ -27,18 +27,19 @@ h1 {
 .filters select {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #B5B5B5; /* Light Grey Border */
   border-radius: 5px;
   transition: 0.3s;
-  background: white;
+  background: #FFFFFF; 
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  color: #212529;  /* Dark Grey Text */
 }
 
 .filters input:focus, 
 .filters select:focus {
   outline: none;
-  border-color: #19D86B; /* Green highlight */
-  box-shadow: 0 0 8px rgba(25, 216, 107, 0.5);
+  border-color: #FF7B00; /* Orange Highlight */
+  box-shadow: 0 0 10px rgba(255, 123, 0, 0.5);
 }
 
 /* Task list styling */
@@ -50,15 +51,15 @@ h1 {
 
 /* Task Card */
 .task-card {
-  background: white;
+  background: #FFFFFF; 
   padding: 15px;
   border-radius: 8px;
   transition: 0.3s;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-  border-left: 5px solid #19D86B; /* Green sidebar indicator */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid #FF7B00;  /* Orange Sidebar Indicator */
 }
 
 .task-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(25, 216, 107, 0.3); /* Green glow */
+  box-shadow: 0 8px 20px rgba(255, 123, 0, 0.3);  /* Orange Glow */
 }

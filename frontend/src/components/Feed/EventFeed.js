@@ -153,6 +153,8 @@ function EventFeed({ loggedInUser }) {
   return (
     <div className="event-feed-container">
       <div className="filter-search-inline">
+      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+
         <input
           type="text"
           placeholder="Search events by name..."
@@ -190,6 +192,7 @@ function EventFeed({ loggedInUser }) {
           ))}
         </select>
       </div>
+      </div>
 
       <h2 className="section-title">Events</h2>
 
@@ -201,6 +204,7 @@ function EventFeed({ loggedInUser }) {
             ) : (
               filteredEvents.map((event) => (
                 <div key={event._id} className="event-card">
+          
                   <div className="event-header">
                     <h3 className="event-title">{event.eventName}</h3>
                     <span

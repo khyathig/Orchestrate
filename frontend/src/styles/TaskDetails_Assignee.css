@@ -1,7 +1,7 @@
 /* TaskDetails.css */
 
 .task-details {
-  padding: 15px;
+  padding: 80px;
   font-family: Arial, sans-serif;
   background: white;
   border-radius: 8px;
@@ -11,7 +11,7 @@
 /* Heading */
 .task-details h1 {
   font-size: 28px;
-  color: #222222;
+  color: #FF7B00; /* Orange Heading */
   font-weight: bold;
   margin-bottom: 12px;
 }
@@ -31,12 +31,12 @@
 /* Status Indicators */
 .status {
   font-weight: bold;
-  color: #19D86B;
+  color: #FF7B00; /* Orange for Status */
 }
 
 .progress {
   font-weight: bold;
-  color: #007bff;
+  color: #FF7B00; /* Orange for Progress */
 }
 
 /* Back Button */
@@ -46,7 +46,7 @@
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background: #19D86B;
+  background: #FF7B00; /* Orange Back Button */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -55,6 +55,6 @@
 }
 
 .back-btn:hover {
-  background: #17C15F;
-  box-shadow: 0 0 10px rgba(25, 216, 107, 0.5);
+  background: #E66A00; /* Darker Orange on hover */
+  box-shadow: 0 0 10px rgba(255, 123, 0, 0.5); /* Orange glow */
 }

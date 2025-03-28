@@ -10,7 +10,7 @@
 /* Heading */
 h1 {
   font-size: 32px;
-  color: #212529; /* Dark text */
+  color: #FF7B00; /* Orange Heading */
   text-align: center;
   margin-bottom: 30px;
   font-weight: 600;
@@ -38,8 +38,8 @@ h1 {
 .filters input:focus, 
 .filters select:focus {
   outline: none;
-  border-color: #19D86B; /* Green highlight */
-  box-shadow: 0 0 8px rgba(25, 216, 107, 0.5);
+  border-color: #FF7B00; /* Orange highlight */
+  box-shadow: 0 0 8px rgba(255, 123, 0, 0.5); /* Orange glow */
 }
 
 /* Task List */
@@ -55,11 +55,11 @@ h1 {
   padding: 15px;
   border-radius: 8px;
   transition: 0.3s;
-  box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.2); /* Green shadow */
-  border-left: 5px solid #19D86B; /* Green sidebar indicator */
+  box-shadow: 0px 4px 8px rgba(255, 123, 0, 0.2); /* Orange shadow */
+  border-left: 5px solid #FF7B00; /* Orange sidebar indicator */
 }
 
 .task-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 128, 0, 0.3); /* Green glow */
+  box-shadow: 0 8px 20px rgba(255, 123, 0, 0.3); /* Orange glow */
 }

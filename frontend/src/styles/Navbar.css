@@ -3,10 +3,10 @@
     display: flex;
     justify-content: space-between; /* Logo left, menu right */
     align-items: center;
-    background-color: #19D86B;
+    background-color: #F06640;
     padding: 5px 10px;
     color: #ffffff;
-    height: 60px; /* Fixed height */
+    height: 80px; /* Fixed height */
     position: fixed;
     top: 0;
     left: 0;
@@ -20,9 +20,14 @@
     font-size: 1.8rem;
     font-weight: bold;
     color: white;
-    line-height: 100px; /* Matches navbar height */
+    line-height: 120px;  /* Increased line height to lower it */
     display: flex;
     align-items: center;
+    padding-top: 20px; 
+      /* Added padding to move it lower */
+      font-family: 'Poppins', sans-serif; /* Stylish serif font */
+      letter-spacing: 1px;            /* Adds spacing between letters */
+      text-transform: uppercase;      /* Makes the text uppercase */
 }
 
 /* Hamburger Menu Icon */
@@ -31,43 +36,57 @@
     font-size: 24px;
     color: white;
     margin-right: 20px;
+    z-index: 10;  /* Ensure it's above other elements */
 }
 
 /* Dropdown Menu */
 .nav-dropdown {
     position: absolute;
-    top: 60px; /* Below navbar */
-    right: 20px; /* Aligns to right */
-    background: #15B055;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 8px 8px;
+    top: 60px;           /* Below navbar */
+    right: 20px;         /* Aligns to right */
+    background: #000000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  /* Subtle shadow */
+    border-radius: 12px; /* Rounded corners */
     display: none;
     flex-direction: column;
-    align-items: flex-end;
-    padding: 10px 20px;
-    width: auto;
+    align-items: flex-start; 
+    padding: 20px 30px;  
+    min-width: 200px;    /* Ensures consistent size */
+    
+    /* Pop-up animation */
+    opacity: 0;           
+    transform: translateY(-20px) scale(0.9);  
+    transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease; 
+    z-index: 999;  /* Ensure dropdown is above everything */
 }
 
 /* Show menu when expanded */
 .navbar.expanded .nav-dropdown {
     display: flex;
+    opacity: 1;            
+    transform: translateY(0) scale(1);  
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* Stronger shadow */
 }
 
 /* Style dropdown links */
 .nav-dropdown button {
     background: none;
     border: none;
-    padding: 12px 15px;
+    padding: 12px 18px;
     font-size: 1rem;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, background 0.3s ease; 
     color: #EEEEEE;
     text-decoration: none;
     display: block;
+    width: 100%;  /* Make buttons full width */
 }
 
-/* Make buttons look like links */
+/* Hover effect */
 .nav-dropdown button:hover {
-    color: #007bff;
-    text-decoration: underline;
+    background: #1E90FF;     /* Light blue hover effect */
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    border-radius: 8px;     /* Smooth corner on hover */
+    transform: scale(1.05);  /* Slight enlarge effect */
 }

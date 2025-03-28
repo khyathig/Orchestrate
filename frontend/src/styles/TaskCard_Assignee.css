@@ -17,13 +17,13 @@
 
 .task-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 14px rgba(25, 216, 107, 0.3); /* Green glow on hover */
+  box-shadow: 0 6px 14px rgba(255, 123, 0, 0.3); /* Orange glow on hover */
 }
 
 /* Title Styling */
 .task-card h3 {
   font-size: 20px;
-  color: #007EFF; /* Bright Blue */
+  color: #FF7B00; /* Orange Title */
   margin-bottom: 10px;
   font-weight: 600;
   word-wrap: break-word;
@@ -39,7 +39,7 @@
 
 /* Buttons inside Task Card */
 .task-card button {
-  background-color: #19D86B; /* Green Button */
+  background-color: #FF7B00; /* Orange Button */
   color: white;
   border: none;
   padding: 8px 16px;
@@ -53,6 +53,6 @@
 }
 
 .task-card button:hover {
-  background-color: #128B48; /* Darker Green on hover */
+  background-color: #D16300; /* Darker Orange on hover */
   transform: scale(1.05);
 }

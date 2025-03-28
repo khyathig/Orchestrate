@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const express = require("express");
 const http = require("http");
@@ -16,16 +17,15 @@ const employeeRoutes = require("./routes/employeeRoutes");
 const app = express();  //  Define app first
 const server = http.createServer(app);  //  Correct server initialization
 
-//  Initialize Socket.IO after defining `app`
+//  Initialize Socket.IO after defining app
 const io = new Server(server, {
   cors: {
-    //origin: "http://localhost:3000",  //  Allow frontend to connect
-    origin: "https://orchestrate-five.vercel.app/",
+    origin: "http://localhost:3000",  //  Allow frontend to connect
     methods: ["GET", "POST"]
   }
 });
 
-//  Attach `io` to the request object so controllers can use it
+//  Attach io to the request object so controllers can use it
 app.use((req, res, next) => {
   req.io = io;
   next();
@@ -58,6 +58,6 @@ app.use("/api/events", eventRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/tasks", taskRoutes);
 
-// Start HTTP Server (Not `app.listen()`)
+// Start HTTP Server (Not app.listen())
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(` Server running on port ${PORT}`));

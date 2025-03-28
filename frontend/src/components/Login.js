@@ -22,7 +22,7 @@ const Login = ({ setLoggedInUser }) => {
         setError("");
         
         try {
-            const res = await axios.post("https://orchestrate-1.onrender.com/api/auth/login", {
+            const res = await axios.post("http://localhost:5000/api/auth/login", {
                 email,
                 password,
             });
@@ -40,7 +40,7 @@ const Login = ({ setLoggedInUser }) => {
             localStorage.setItem("userEmail", user.email);
         
             // Set token in Axios for further requests
-            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            axios.defaults.headers.common["Authorization"] = 'Bearer ${token}';
         
             setLoggedInUser(user);
             navigate("/feed");
