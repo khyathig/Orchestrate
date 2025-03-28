@@ -1,47 +1,61 @@
-/* Dashboard.css */
+.task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Matching width */
+  gap: 24px;
+}
 
-.dashboard {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .dashboard h1 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .task-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 20px;
-  }
-  
-  .task-card {
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    transition: transform 0.3s ease;
-  }
-  
-  .task-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .view-details {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    color: #fff;
-    background: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .view-details:hover {
-    background: #0056b3;
-  }
-  
+.task-card {
+  background: #F8FCFF; /* Light theme-friendly background */
+  border: 2px solid #CCE7FF; /* Light blue border */
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 250px; /* Taller to fit content */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Adding the green shadow effect */
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(25, 216, 107, 0.5); /* Green glow */
+}
+
+/* Task Title */
+.task-card h3 {
+  font-size: 20px;
+  color: #007EFF; /* Blue Title */
+  margin-bottom: 8px;
+}
+
+/* Task Details */
+.task-card p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* View Details Button */
+.view-details {
+  display: inline-block;
+  margin-top: auto;
+  padding: 10px 20px;
+  color: white;
+  background: #19D86B; /* Themed Green */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  min-width: 150px; /* Keeping same width as before */
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.view-details:hover {
+  background: #128B48; /* Darker Green */
+  transform: scale(1.05);
+}

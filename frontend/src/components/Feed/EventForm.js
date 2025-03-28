@@ -172,8 +172,9 @@ function EventForm(userRole ) {
           </div>
         ))}
 
-        <button type="button" onClick={addTask}>Add Task</button>
-        <button type="submit">Create Event</button>
+        <button type="button" onClick={addTask} className="add-task">Add Task</button>
+        <button type="submit" className="submit-event">Create Event</button>
+
       </form>
     </div>
   );

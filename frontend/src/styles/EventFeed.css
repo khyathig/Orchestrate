@@ -1,9 +1,9 @@
 .event-feed-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
     padding: 40px;
-    background: #f5f5f5;
+    background: #EEEEEE;
     min-height: 100vh;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -31,7 +31,7 @@
 .search-input {
     padding: 12px 18px;
     width: 300px;
-    border: 1px solid #ccc;
+    border: 1px solid #D4E5E8;
     border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s ease;
@@ -40,7 +40,7 @@
 
 .search-input:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #D4E5E8;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
@@ -57,8 +57,8 @@
 }
 
 .filter-dropdown:hover {
-    background: #007bff;
-    color: #fff;
+    background: #007EFF;
+    color: #EEEEEE;
 }
 
 /* 🛠️ Section Titles */
@@ -74,7 +74,7 @@
 .content-wrapper {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 60px;
     width: 100%;
     align-items: flex-start;
 }
@@ -91,7 +91,7 @@
 .event-feed {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));  /* Increase min-width */
-    gap: 30px;  /* More spacing between cards */
+    gap: 60px;  /* More spacing between cards */
     width: 100%;
 }
 
@@ -110,9 +110,9 @@
 
 /* 📄 Event Card */
 .event-card {
-    background: #fff;
+    background: #D4E5E8;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
     padding: 25px;
     transition: all 0.3s ease;
     display: flex;
@@ -123,6 +123,7 @@
 }
 
 .event-card:hover {
+    background: #D4E5E8;
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
 }

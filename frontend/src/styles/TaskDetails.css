@@ -1,94 +1,65 @@
-/* Task Details container */
-.task-details {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 30px;
-    background: #f5f5f5;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  p {
-    font-size: 18px;
-    line-height: 1.6;
-  }
-  
-  strong {
-    font-weight: bold;
-    color: #555;
-  }
-  
-  /* Comments section */
-  .comments-section {
-    margin-top: 30px;
-  }
-  
-  .comments h3 {
-    font-size: 22px;
-    color: #444;
-    margin-bottom: 15px;
-  }
-  
-  /* Individual comment */
-  .comment {
-    background: #fff;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  }
-  
-  .comment p {
-    margin: 0;
-    font-size: 16px;
-  }
-  
-  .comment small {
-    color: #777;
-    font-size: 14px;
-  }
-  
-  /* Add comment section */
-  .add-comment {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .add-comment textarea {
-    width: 100%;
-    height: 80px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: 0.3s;
-  }
-  
-  .add-comment textarea:focus {
-    outline: none;
-    border-color: #4CAF50;
-  }
-  
-  .add-comment button {
-    padding: 12px 20px;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .add-comment button:hover {
-    background: #45a049;
-  }
-  
+/* Dashboard Styling */
+.dashboard {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #F8F9FA; /* Light background */
+}
+
+/* Heading */
+h1 {
+  font-size: 32px;
+  color: #212529; /* Dark text */
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Filters Section */
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.filters input, 
+.filters select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: 0.3s;
+  background: white;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filters input:focus, 
+.filters select:focus {
+  outline: none;
+  border-color: #19D86B; /* Green highlight */
+  box-shadow: 0 0 8px rgba(25, 216, 107, 0.5);
+}
+
+/* Task List */
+.task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+/* Task Card */
+.task-card {
+  background: white; /* Light background */
+  padding: 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+  box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.2); /* Green shadow */
+  border-left: 5px solid #19D86B; /* Green sidebar indicator */
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 128, 0, 0.3); /* Green glow */
+}

@@ -19,7 +19,8 @@ const server = http.createServer(app);  //  Correct server initialization
 //  Initialize Socket.IO after defining `app`
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",  //  Allow frontend to connect
+    //origin: "http://localhost:3000",  //  Allow frontend to connect
+    origin: "https://orchestrate-five.vercel.app/",
     methods: ["GET", "POST"]
   }
 });
