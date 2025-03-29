@@ -1,6 +1,8 @@
 const Task = require("../models/Task");
 const Employee = require("../models/Employee");
 const Event = require("../models/Event");
+const mongoose = require("mongoose");
+
 
 // Get tasks assigned to the creator
 exports.getTasks = async (req, res) => {
@@ -116,6 +118,22 @@ exports.addCommentToTask = async (req, res) => {
   }
 };
 
+exports.getTaskComments = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const task = await Task.findById(id);
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    res.status(200).json({ comments: task.comments || [] });
+  } catch (error) {
+    console.error("Error fetching comments:", error.message);
+    res.status(500).json({ message: "Server error: " + error.message });
+  }
+};
+
 exports.getEventsByCreator = async (req, res) => {
   try {
     const userEmail = req.headers["user-email"];
@@ -149,5 +167,32 @@ exports.getEventsByCreator = async (req, res) => {
   } catch (error) {
     console.error("Error fetching events:", error.message);
     res.status(500).json({ message: "Error fetching events: " + error.message });
+  }
+};
+
+// Controller to fetch tasks for a specific event
+
+exports.getTasksByEventID = async (req, res) => {
+  try {
+      const { eventID } = req.query;
+      console.log("📥 Received eventID:", eventID);
+      console.log("📌 Type of eventID:", typeof eventID);
+
+      // Convert eventID to ObjectId
+      if (!mongoose.Types.ObjectId.isValid(eventID)) {
+          return res.status(400).json({ error: "Invalid eventID format" });
+      }
+
+      const objectId = new mongoose.Types.ObjectId(eventID);
+      console.log("🔄 Converted eventID to ObjectId:", objectId);
+
+      // Query tasks using converted ObjectId
+      const tasks = await Task.find({ eventID: objectId });
+      console.log("✅ Found tasks:", tasks);
+
+      res.json(tasks);
+  } catch (error) {
+      console.error("❌ Error fetching tasks by eventID:", error);
+      res.status(500).json({ error: "Server error" });
   }
 };

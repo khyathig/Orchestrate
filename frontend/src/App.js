@@ -8,6 +8,7 @@ import RazorpayButton from "./components/Feed/RazorpayButton";
 import ReportsPage from "./components/Reports/ReportsPage";
 import Dashboard from "./components/Event Creator Tasks/Dashboard";
 import TaskDetails from "./components/Event Creator Tasks/TaskDetails";
+import EventTasksPage from "./components/Event Creator Tasks/EventTasksPage";
 import DashboardAssignee from "./components/Assignee Tasks/Dashboard_Assignee";
 import TaskDetailsAssignee from "./components/Assignee Tasks/TaskDetails_Assignee";
 import { TaskProvider } from "./components/Assignee Tasks/TaskContext_Assignee";
@@ -67,8 +68,8 @@ function App() {
                                 element={loggedInUser ? <ReportsPage /> : <Navigate to="/" replace />}
                             />
 
-                            {/* Event Creator's Dashboard */}
-                            <Route 
+                           {/* Event Creator's Dashboard */}
+                           <Route 
                                 path="/manage-events" 
                                 element={loggedInUser ? <Dashboard /> : <Navigate to="/" replace />}
                             />
@@ -76,6 +77,12 @@ function App() {
                                 path="/admin/:id" 
                                 element={loggedInUser ? <TaskDetails /> : <Navigate to="/" replace />}
                             />
+                            {/* ✅ New Route for Viewing Event-Specific Tasks */}
+                            <Route 
+                                path="/event/:eventID/tasks" 
+                                element={loggedInUser ? <EventTasksPage /> : <Navigate to="/" replace />}
+                            />
+
 
                             {/* Task Assignee Dashboard */}
                             <Route 

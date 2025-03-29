@@ -1,100 +1,149 @@
-// components/TaskDetails.js
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchTaskById } from './taskService';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { TaskContext } from "./TaskContext";
+import axios from "axios";
+import "../../styles/TaskDetails.css";
 
 const TaskDetails = () => {
-  const { id } = useParams();
-  const [task, setTask] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { fetchTasks } = useContext(TaskContext);
+  const { task } = location.state || {};
+
+  const [assigneeDetails, setAssigneeDetails] = useState(null);
+  const [comments, setComments] = useState(task?.comments || []);
+  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-    if (!id) return;
-  
-    const loadTask = async () => {
+    if (!task?._id) {
+      console.error("⚠ Task data not received correctly.");
+    } else {
+      console.log("✅ Task Details:", task);
+    }
+  }, [task]);
+
+  // Fetch assignee details
+  useEffect(() => {
+    if (!task?.assignee) return;
+
+    const fetchAssigneeDetails = async () => {
       try {
-        const taskData = await fetchTaskById(id);
-        console.log("Task Data Received:", taskData);
-        setTask(taskData);
-        setComments(taskData?.comments || []);
-      } catch (err) {
-        console.error("Failed to load task:", err);
-        setError("Failed to load task");
-      } finally {
-        setLoading(false);
+        const response = await axios.get(`http://localhost:5000/api/employees/${task.assignee}`);
+        setAssigneeDetails(response.data);
+      } catch (error) {
+        console.error("❌ Error fetching assignee details:", error);
       }
     };
-    
-    loadTask();
 
-  }, [id]);
-  
-  const handleCommentSubmit = async () => {
+    fetchAssigneeDetails();
+  }, [task?.assignee]);
+
+  // Fetch latest comments every 5 seconds (Polling)
+  useEffect(() => {
+    if (!task?._id) return;
+
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/admin/${task._id}/comments`);
+        setComments(response.data.comments || []);
+      } catch (error) {
+        console.error("❌ Error fetching comments:", error);
+      }
+    };
+
+    fetchComments();
+    const interval = setInterval(fetchComments, 5000); // Fetch comments every 5s
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [task?._id]);
+
+  // Handle adding a new comment
+  const handleAddComment = async () => {
     if (!newComment.trim()) {
-      console.warn('Cannot submit empty comment');
-      return;
-    }
-  
-    if (!id) {
-      console.error('Error: Task ID is missing.');
+      console.warn("⚠ Comment is empty. Please add a message before submitting.");
       return;
     }
   
     try {
-      const author = JSON.parse(localStorage.getItem('user'))?.email;
-      if (!author) {
-        console.error('Error: Author name not found in localStorage');
+      const userEmail = localStorage.getItem("userEmail"); // Get logged-in user email
+      if (!userEmail) {
+        console.error("❌ User email not found in localStorage");
         return;
       }
   
-      const response = await axios.post(`http://localhost:5000/api/admin/${id}/comments`, {
-        author,
-        message: newComment,
-      });
+      const response = await axios.post(
+        `http://localhost:5000/api/admin/${task._id}/comments`, // Corrected endpoint
+        { 
+          email: userEmail,  // Logged-in user's email
+          author: task.creator, // Task creator as the author
+          message: newComment 
+        }
+      );
   
-      console.log('Comment added successfully:', response.data);
-  
-      setComments([...comments, { author, message: newComment, timestamp: new Date().toISOString() }]);
-      setNewComment('');
+      if (response.data.task?.comments?.length) {
+        setComments(response.data.task.comments); // Set all comments instead of appending manually
+        setNewComment("");
+      } else {
+        console.warn("⚠ No comments found in response.");
+      }
     } catch (error) {
-      console.error('Error adding comment:', error.response?.data?.message || error.message);
+      console.error("❌ Error adding comment:", error);
     }
   };
   
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-  
+
+  // Navigate back and refresh tasks
+  const handleBackToDashboard = async () => {
+    if (fetchTasks) await fetchTasks();
+    if (task?.eventID) {
+      navigate(`/manage-events`);
+    } else {
+      navigate(-1);
+    }
+  };
+
+  if (!task || !task._id) {
+    return (
+      <div className="task-details">
+        <h2>⚠ Task not found.</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="task-details">
       <h1>{task.taskName}</h1>
       <p><strong>Event:</strong> {task.eventName}</p>
       <p><strong>Description:</strong> {task.description}</p>
-      <p><strong>Status:</strong> {task.status}</p>
-  
-      <h3>Comments</h3>
-      <div className="comments">
-        {comments.map((comment, index) => (
-          <div key={index} className="comment">
-            <p>{comment.message}</p>
-            <small>{comment.author} - {new Date(comment.timestamp).toLocaleString()}</small>
-          </div>
-        ))}
+      <p><strong>Budget:</strong> {task.budget !== null ? `₹${task.budget}` : "N/A"}</p>
+      <p><strong>Event ID:</strong> {task.eventID}</p>
+      <p><strong>Assigned To:</strong> {assigneeDetails ? `${assigneeDetails.name} (${assigneeDetails.email})` : task.assignee}</p>
+      <p><strong>Assigned By:</strong> {task.creator}</p>
+
+      <div className="comments-section">
+        <h3>Comments</h3>
+        {comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <div key={index} className="comment">
+              <p>{comment.message}</p>
+              <small>By {comment.author} at {comment.timestamp ? new Date(comment.timestamp).toLocaleString() : "Unknown Time"}</small>
+            </div>
+          ))
+        ) : (
+          <p>No comments yet.</p>
+        )}
+
+        <textarea
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Add a comment..."
+        />
+        <button onClick={handleAddComment}>Add Comment</button>
       </div>
-      <textarea
-        id="commentInput"
-        name="comment"
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-        placeholder="Add a comment..."
-      />
-      <button onClick={handleCommentSubmit}>Add Comment</button>
+
+      <button onClick={handleBackToDashboard}>Refresh & Back to Dashboard</button>
     </div>
   );
-  };
-  
-  export default TaskDetails;
-  
+};
+
+export default TaskDetails;

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { updateTaskStatus } from './api';
 import { TaskContext } from './TaskContext_Assignee';
 import axios from 'axios';
-import '../../styles/TaskDetails_Assignee.css';
+//import '../../styles/TaskDetails_Assignee.css';
 
 const TaskDetails = () => {
   const location = useLocation();
@@ -23,6 +23,7 @@ const TaskDetails = () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/employees/${task.assignee}`);
         setAssigneeDetails(response.data);
+        console.log("Assignee task details", response.data)
       } catch (error) {
         console.error("Error fetching assignee details:", error);
       }
@@ -68,7 +69,7 @@ const TaskDetails = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:5000/api/tasks/${task?._id}/comments`, // Fix: Ensure correct URL
+        `http://localhost:5000/api/tasks/assigned/${task?._id}/comments`, // Fix: Ensure correct URL
         { message: newComment },
         { headers: { "user-email": userEmail } }
       );
