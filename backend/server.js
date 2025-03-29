@@ -21,7 +21,7 @@ const server = http.createServer(app);  //  Correct server initialization
 const io = new Server(server, {
   cors: {
     origin: ["http://localhost:3000", "https://orchestrate-five.vercel.app"],  //  Allow frontend to connect
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
   }
 });
 
@@ -45,7 +45,7 @@ app.use(express.json());
 
 app.use(cors({
     origin: process.env.FRONTEND_URL, // Allow frontend
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization", "user-email"],
     credentials: true
 }));

@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { Pie, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
@@ -6,11 +6,10 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-import '../../styles/ComprehensiveReport.css'; 
+import '../../styles/ComprehensiveReport.css';
 
 ChartJS.register(ArcElement, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
-// Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const DetailedEventReport = () => {
@@ -22,34 +21,31 @@ const DetailedEventReport = () => {
   const [error, setError] = useState('');
   const reportRef = useRef();
 
-  const fetchReport = useCallback(async (isInitialLoad = false) => {
+
+  const fetchReport = useCallback(async () => {
     setLoading(true);
     setError('');
+
     try {
       const params = new URLSearchParams();
-      
-      // Only add filters if not initial load
-      if (!isInitialLoad) {
-        if (eventName) params.append('eventName', eventName);
-        if (team) params.append('team', team);
-        if (year) params.append('year', year);
+      if (eventName) params.append('eventName', eventName);
+      if (team) params.append('team', team);
+      if (year) params.append('year', year);
+
+      const response = await axios.get(`${API_BASE_URL}/api/events/detailedReport`, { params });
+
+      if (!response.data.length) {
+        setError("No data found for the given criteria.");
       }
-  
-      const response = await axios.get(`${API_BASE_URL}/detailedReport`, { params });
-      console.log("Request URL:", `${API_BASE_URL}/detailedReport?${params.toString()}`);
-      console.log("Response Data:", response.data);
-  
       setReportData(response.data);
     } catch (err) {
-      console.error("Error fetching detailed report:", err);
-      setError("No data found for the given criteria.");
+      setError("Error fetching report.");
     }
     setLoading(false);
   }, [eventName, team, year]);
 
-  // Fetch reports on initial load
   useEffect(() => {
-    fetchReport(true);
+    fetchReport();
   }, [fetchReport]);
 
   const chartOptions = {
@@ -120,52 +116,20 @@ const DetailedEventReport = () => {
                   <p><strong>Pending Tasks:</strong> {event.pendingTasks}</p>
                 </div>
                 <div className="chart-container">
-                  <div className="chart-wrapper">
-                    <Pie
-                      className="chart"
-                      data={{
-                        labels: event.totalRSVP === 0
-                          ? ['No RSVP']
-                          : event.totalAttended === 0
-                            ? ['Not Attended']
-                            : event.totalAttended === event.totalRSVP
-                              ? ['Attended']
-                              : ['Attended', 'Not Attended'],
-                        datasets: [{
-                          label: 'Attendance',
-                          data: event.totalRSVP === 0
-                            ? [1]
-                            : event.totalAttended === 0
-                              ? [1]
-                              : event.totalAttended === event.totalRSVP
-                                ? [1]
-                                : [event.totalAttended, event.totalRSVP - event.totalAttended],
-                          backgroundColor: event.totalRSVP === 0
-                            ? ['#d3d3d3'] // Grey if no RSVP
-                            : event.totalAttended === 0
-                              ? ['#f44336'] // Red for no attendance
-                              : event.totalAttended === event.totalRSVP
-                                ? ['#4caf50'] // Green for 100% attendance
-                                : ['#4caf50', '#f44336']
-                        }]
-                      }}
-                      options={chartOptions}
-                  />
-                  </div>
-                  <div className="chart-wrapper">
-                  <Bar
-                    className="chart"
-                    data={{
-                      labels: ['Completed Tasks', 'In Progress Tasks', 'Pending Tasks'],
-                      datasets: [{
-                        label: 'Tasks',
-                        data: [event.completedTasks, event.inProgressTasks, event.pendingTasks],
-                        backgroundColor: ['#2196f3', '#ffc107', '#ff9800']
-                      }]
-                    }}
-                    options={chartOptions}
-                  />
-                  </div>
+                  <Pie className="chart" data={{
+                    labels: ['Attended', 'Not Attended'],
+                    datasets: [{
+                      data: [event.totalAttended, event.totalRSVP - event.totalAttended],
+                      backgroundColor: ['#4caf50', '#f44336']
+                    }]
+                  }} options={chartOptions} />
+                  <Bar className="chart" data={{
+                    labels: ['Completed Tasks', 'In Progress Tasks', 'Pending Tasks'],
+                    datasets: [{
+                      data: [event.completedTasks, event.inProgressTasks, event.pendingTasks],
+                      backgroundColor: ['#2196f3', '#ffc107', '#ff9800']
+                    }]
+                  }} options={chartOptions} />
                 </div>
               </div>
             ))}

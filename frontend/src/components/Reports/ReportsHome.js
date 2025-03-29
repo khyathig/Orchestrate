@@ -22,7 +22,7 @@ const ReportsHome = () => {
     setError('');
 
     try {
-      const response = await axios.get(`${API_BASE_URL}/compiledReport`);
+      const response = await axios.get(`${API_BASE_URL}/api/events/compiledReport`);
       
       if (!response.data || !Array.isArray(response.data)) {
         throw new Error('Invalid data format from API.');

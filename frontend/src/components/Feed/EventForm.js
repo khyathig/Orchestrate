@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/EventForm.css";
@@ -6,21 +6,40 @@ import "../../styles/EventForm.css";
 // Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-function EventForm(userRole ) {
+function EventForm({userRole}) {
   const [eventName, setEventName] = useState("");
   const [description, setDescription] = useState("");
   const [venue, setVenue] = useState("");
   const [date, setDate] = useState("");
-  const [eventType, setEventType] = useState(userRole === "manager" ? "limited-entry" : "firm-wide"); 
+  const [eventType, setEventType] = useState();
   const [availableSlots, setAvailableSlots] = useState("");
   const [ticketPrice, setTicketPrice] = useState("");
   const [team, setTeam] = useState("");
+  const [totalBudget, setTotalBudget] = useState("");
   const [tasks, setTasks] = useState([{ taskName: "", description: "", assignee: "", deadline: "", budget: "" }]);
   const [errors, setErrors] = useState({});
+  const [validationErrors, setValidationErrors] = useState({}); // Added state for validation errors
   const navigate = useNavigate();
 
+  // Ensure eventType is properly set based on userRole when the component mounts
+  useEffect(() => {
+    if (userRole === "manager") {
+      setEventType("limited-entry");
+    } else {
+      setEventType("firm-wide");
+    }
+  }, [userRole]);
+
   // Validate number fields
-  const validateNumber = (value) => /^[0-9]*$/.test(value);
+  const handleNumberChange = (value, field) => {
+    if (/^\d*$/.test(value)) {
+      setValidationErrors((prev) => ({ ...prev, [field]: "" })); // Corrected to setValidationErrors
+      return value;
+    } else {
+      setValidationErrors((prev) => ({ ...prev, [field]: "Invalid entry: Only numbers allowed" })); // Corrected to setValidationErrors
+      return value;
+    }
+  };
 
   const handleTaskChange = (index, field, value) => {
     const updatedTasks = [...tasks];
@@ -80,6 +99,7 @@ function EventForm(userRole ) {
       ticketPrice: eventType === "limited-entry" ? Number(ticketPrice) : null,
       team: eventType === "team-specific" ? team : "",
       tasks: formattedTasks,
+      totalBudget: totalBudget ? Number(totalBudget) : 0,
     };
 
     try {
@@ -107,6 +127,10 @@ function EventForm(userRole ) {
   return (
     <div className="form-container">
       <h2>Create Event</h2>
+
+      {/* Display general error message if any */}
+      {errors.message && <div className="error-message">{errors.message}</div>}
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Event Name</label>
@@ -125,30 +149,53 @@ function EventForm(userRole ) {
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
         </div>
         <div className="form-group">
-          <label>Event Type</label>
-          <select value={eventType} onChange={(e) => setEventType(e.target.value)}>
-            {/* Show "Firm-Wide" ONLY for admins */}
-            {userRole !== "manager" && <option value="firm-wide">Firm-Wide</option>}
-            <option value="limited-entry">Limited Entry</option>
-            <option value="team-specific">Team-Specific</option>
-          </select>
+          <label>Total Budget (optional)</label>
+          <input
+            type="text"
+            placeholder="Total Budget"
+            value={totalBudget}
+            onChange={(e) => setTotalBudget(handleNumberChange(e.target.value, "totalBudget"))}
+            className={validationErrors.totalBudget ? "input-error" : ""}
+          />
+          {validationErrors.totalBudget && <span className="error-text">{validationErrors.totalBudget}</span>}
         </div>
+        <div className="form-group">
+  <label>Event Type</label>
+  <select
+    value={eventType}
+    onChange={(e) => setEventType(e.target.value)}
+  >
+    {/* Show "Firm-Wide" ONLY for non-managers */}
+    {userRole !== "manager" && <option value="firm-wide">Firm-Wide</option>}
+    <option value="limited-entry">Limited Entry</option>
+    <option value="team-specific">Team-Specific</option>
+  </select>
+</div>
 
         {eventType === 'limited-entry' && (
           <>
             <div className="form-group">
               <label>Available Slots</label>
-              <input type="text" placeholder="Available Slots" value={availableSlots} onChange={(e) => {
-                if (validateNumber(e.target.value, 'availableSlots')) setAvailableSlots(e.target.value);
-              }} required />
-              {errors.availableSlots && <p className="error">{errors.availableSlots}</p>}
+              <input
+                type="text"
+                placeholder="Available Slots"
+                value={availableSlots}
+                onChange={(e) => setAvailableSlots(handleNumberChange(e.target.value, "availableSlots"))}
+                className={validationErrors.availableSlots ? "input-error" : ""}
+                required
+              />
+              {validationErrors.availableSlots && <span className="error-text">{validationErrors.availableSlots}</span>}
             </div>
             <div className="form-group">
               <label>Ticket Price (optional)</label>
-              <input type="text" placeholder="Ticket Price" value={ticketPrice} onChange={(e) => {
-                if (validateNumber(e.target.value, 'ticketPrice')) setTicketPrice(e.target.value);
-              }} />
-              {errors.ticketPrice && <p className="error">{errors.ticketPrice}</p>}
+              <input
+                type="text"
+                placeholder="Ticket Price"
+                value={ticketPrice}
+                onChange={(e) => setTicketPrice(handleNumberChange(e.target.value, "ticketPrice"))}
+                className={validationErrors.ticketPrice ? "input-error" : ""}
+              />
+              {validationErrors.ticketPrice && <span className="error-text">{validationErrors.ticketPrice}</span>}
             </div>
           </>
         )}
@@ -167,17 +214,20 @@ function EventForm(userRole ) {
             <input type="text" placeholder="Description" value={task.description} onChange={(e) => handleTaskChange(index, 'description', e.target.value)} />
             <input type="email" placeholder="Assigned To (Email)" value={task.assignee} onChange={(e) => handleTaskChange(index, 'assignee', e.target.value)} required />
             <input type="date" placeholder="Task Deadline" value={task.deadline} onChange={(e) => handleTaskChange(index, 'deadline', e.target.value)} />
-            <input type="text" placeholder="Budget" value={task.budget} onChange={(e) => {
-              if (validateNumber(e.target.value, `budget-${index}`)) handleTaskChange(index, 'budget', e.target.value);
-            }} />
-            {errors[`budget-${index}`] && <p className="error">{errors[`budget-${index}`]}</p>}
+            <input
+              type="text"
+              placeholder="Budget"
+              value={task.budget}
+              onChange={(e) => handleTaskChange(index, 'budget', handleNumberChange(e.target.value, `task-${index}-budget`))}
+              className={validationErrors[`task-${index}-budget`] ? "input-error" : ""}
+            />
+            {validationErrors[`task-${index}-budget`] && <span className="error-text">{validationErrors[`task-${index}-budget`]}</span>}
             <button type="button" onClick={() => removeTask(index)}>Remove Task</button>
           </div>
         ))}
 
         <button type="button" onClick={addTask} className="add-task">Add Task</button>
         <button type="submit" className="submit-event">Create Event</button>
-
       </form>
     </div>
   );

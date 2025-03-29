@@ -59,7 +59,7 @@ const ComprehensiveReport = () => {
       if (eventType) params.eventType = eventType;
   
       const response = await axios.get(
-        `${API_BASE_URL}/compiledReport`,
+        `${API_BASE_URL}/api/events/compiledReport`,
         { params }
       );
   

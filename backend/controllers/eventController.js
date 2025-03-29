@@ -7,7 +7,7 @@ const { sendEmail } = require("../services/emailService");
 
 exports.createEvent = async (req, res) => {
     try {
-        const { eventName, eventType, date, venue, description, availableSlots, ticketPrice, team, tasks } = req.body;
+        const { eventName, eventType, date, venue, description, availableSlots, ticketPrice, team, tasks , totalBudget} = req.body;
 
         if (eventType.toLowerCase() === "team-specific" && !team) {
             return res.status(400).json({ error: "Team is required for team-specific events." });
@@ -32,6 +32,7 @@ exports.createEvent = async (req, res) => {
             team: eventType.toLowerCase() === "team-specific" ? team : "",
             isPaid: eventType.toLowerCase() === "limited-entry",
             creator: creatorEmail,
+            totalBudget: totalBudget || 0, // If not provided, default to 0
         });
 
         await event.save();

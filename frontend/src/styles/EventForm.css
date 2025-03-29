@@ -45,7 +45,7 @@ h2, h3 {
 /* Center the Form Container */
 .form-container {
     
-    max-width: 650px;
+    max-width: 800px;
     margin: 40px auto;
     padding: 80px;
     background-color: #ddd8d2;
@@ -90,6 +90,18 @@ h2, h3 {
     font-size: 12px;
     margin-top: 2px;
 }
+.input-error {
+    border: 2px solid red;
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
 
 /* Button Styling */
 .task-container button {
