@@ -4,6 +4,9 @@ import socket from "../../utils/socket";
 import "../../styles/NotificationPanel.css";
 import { Bell, MessageSquare, Calendar } from "lucide-react"; // Icons
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 function NotificationPanel({ loggedInUser }) {
     const [tasks, setTasks] = useState([]);
 
@@ -15,7 +18,7 @@ function NotificationPanel({ loggedInUser }) {
                 return;
             }
             try {
-                const res = await axios.get("http://localhost:5000/api/tasks/assigned", {
+                const res = await axios.get(`${API_BASE_URL}/api/tasks/assigned`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         "user-email": loggedInUser.email,

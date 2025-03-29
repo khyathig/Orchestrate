@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/EventFeed.css";
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const RazorpayButton = ({ event, loggedInUser }) => {
     const [isRSVPd, setIsRSVPd] = useState(false);
 
@@ -24,7 +27,7 @@ const RazorpayButton = ({ event, loggedInUser }) => {
 
     const handlePayment = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/payment/create-order", {
+            const response = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: event.ticketPrice }),
@@ -44,7 +47,7 @@ const RazorpayButton = ({ event, loggedInUser }) => {
 
                     try {
                         const res = await axios.post(
-                            "http://localhost:5000/api/payment/confirm-payment",
+                            `${API_BASE_URL}/api/payment/confirm-payment`,
                             {
                                 eventId: event._id,
                                 employeeEmail: loggedInUser?.email,

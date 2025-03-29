@@ -4,6 +4,9 @@ import { TaskContext } from "./TaskContext";
 import axios from "axios";
 import "../../styles/TaskDetails.css";
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const TaskDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,7 +31,7 @@ const TaskDetails = () => {
 
     const fetchAssigneeDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/employees/${task.assignee}`);
+        const response = await axios.get(`${API_BASE_URL}/api/employees/${task.assignee}`);
         setAssigneeDetails(response.data);
       } catch (error) {
         console.error("❌ Error fetching assignee details:", error);
@@ -44,7 +47,7 @@ const TaskDetails = () => {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/admin/${task._id}/comments`);
+        const response = await axios.get(`${API_BASE_URL}/api/admin/${task._id}/comments`);
         setComments(response.data.comments || []);
       } catch (error) {
         console.error("❌ Error fetching comments:", error);
@@ -72,7 +75,7 @@ const TaskDetails = () => {
       }
   
       const response = await axios.post(
-        `http://localhost:5000/api/admin/${task._id}/comments`, // Corrected endpoint
+        `${API_BASE_URL}/api/admin/${task._id}/comments`, // Corrected endpoint
         { 
           email: userEmail,  // Logged-in user's email
           author: task.creator, // Task creator as the author

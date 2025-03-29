@@ -17,6 +17,7 @@ import {
   Legend
 } from 'chart.js';
 
+
 ChartJS.register(
   ArcElement,
   BarElement,
@@ -26,6 +27,9 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const ComprehensiveReport = () => {
   const [eventName, setEventName] = useState('');
@@ -55,7 +59,7 @@ const ComprehensiveReport = () => {
       if (eventType) params.eventType = eventType;
   
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/compiledReport`,
+        `${API_BASE_URL}/compiledReport`,
         { params }
       );
   

@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 export const fetchTasks = async () => {
   try {
     const userEmail = localStorage.getItem("userEmail");
@@ -10,7 +13,7 @@ export const fetchTasks = async () => {
       return [];
     }
 
-    const response = await axios.get("http://localhost:5000/api/tasks/assigned", {
+    const response = await axios.get(`${API_BASE_URL}/api/tasks/assigned`, {
       headers: { "user-email": userEmail },
     });
 
@@ -25,7 +28,7 @@ export const fetchTasks = async () => {
 export const addCommentToTask = async (taskId, message) => {
   try {
     const userEmail = localStorage.getItem("userEmail");
-    const response = await axios.post(`http://localhost:5000/api/tasks/assigned/${taskId}/comments`, 
+    const response = await axios.post(`${API_BASE_URL}/api/tasks/assigned/${taskId}/comments`, 
       { message }, 
       { headers: { "user-email": userEmail } }
     );
@@ -45,7 +48,7 @@ export const updateTaskStatus = async (taskId, status) => {
     }
 
     const response = await axios.patch( //  Use PATCH instead of PUT
-      `http://localhost:5000/api/tasks/${taskId}/status`, 
+      `${API_BASE_URL}/api/tasks/${taskId}/status`, 
       { status } // Only send status, taskId is already in the URL
     );
 

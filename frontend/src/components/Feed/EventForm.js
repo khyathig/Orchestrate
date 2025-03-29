@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/EventForm.css";
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 function EventForm(userRole ) {
   const [eventName, setEventName] = useState("");
   const [description, setDescription] = useState("");
@@ -81,7 +84,7 @@ function EventForm(userRole ) {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/events",
+        `${API_BASE_URL}/api/events`,
         newEvent,
         {
           headers: {

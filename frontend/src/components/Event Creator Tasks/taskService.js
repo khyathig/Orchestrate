@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/admin';
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+const API_URL = `${API_BASE_URL}/api/admin`;
 
 // Enhanced logging function
 const logData = (label, data) => {

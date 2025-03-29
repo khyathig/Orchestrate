@@ -182,15 +182,16 @@ exports.getDetailedReport = async (req, res) => {
     const query = {};
 
     // Apply query filters
-    if (eventName) query.eventName = { $regex: new RegExp(`^${eventName}$`, "i") };
-    if (team) query.team = { $regex: new RegExp(`^${team}$`, "i") };
+    if (eventName) query.eventName = { $regex: new RegExp(eventName, "i") }; // Partial match
+    if (team) query.team = { $regex: new RegExp(team, "i") }; // Partial match
+
     if (year) {
       const startOfYear = new Date(`${year}-01-01T00:00:00.000Z`);
       const endOfYear = new Date(`${year}-12-31T23:59:59.999Z`);
-      query.date = { $gte: startOfYear, $lte: endOfYear };
+      query.date = { $gte: startOfYear, $lte: endOfYear }; 
     }
 
-    console.log("Generated Event Query:", query);
+    console.log("Generated Event Query:", JSON.stringify(query, null, 2));
 
     const events = await Event.find(query);
     if (!events.length) {
@@ -200,10 +201,8 @@ exports.getDetailedReport = async (req, res) => {
 
     console.log(`Fetched ${events.length} events for detailed report.`);
 
-    // Generate report for each event
     const reportData = await Promise.all(events.map(async (event) => {
       try {
-        // Validate if event._id is a valid ObjectId
         if (!mongoose.Types.ObjectId.isValid(event._id)) {
           console.error(`Invalid ObjectId for event: ${event.eventName}, ID: ${event._id}`);
           return null;
@@ -211,13 +210,10 @@ exports.getDetailedReport = async (req, res) => {
 
         console.log(`Fetching tasks for event: ${event.eventName}, ID: ${event._id}`);
 
-        // Find all tasks with eventID matching the current event
         const tasks = await Task.find({ eventID: event._id });
-        if (!tasks.length) {
-            console.error(`No tasks found for Event: ${event.eventName}, ID: ${event._id}`);
-          } else {
-            console.log(`Tasks fetched for ${event.eventName}:`, tasks.length);
-          }
+
+        // Log task fetching
+        console.log(`Tasks found for ${event.eventName}: ${tasks.length}`);
 
         // Calculate task metrics
         const totalTasks = tasks.length;
@@ -227,13 +223,13 @@ exports.getDetailedReport = async (req, res) => {
         const taskCompletionRate = totalTasks ? ((completedTasks / totalTasks) * 100).toFixed(2) : 0;
 
         // Attendance calculations
-        const totalAttended = event.attendees?.length || 0; // attendees array
-        const totalRSVP = totalAttended; // Assuming RSVP is equivalent to attendees
+        const totalAttended = event.attendees?.length || 0;
+        const totalRSVP = event.totalRSVP || totalAttended; // Ensure proper RSVP count
         const attendancePercentage = totalRSVP > 0
           ? ((totalAttended / totalRSVP) * 100).toFixed(2)
           : '0.00';
 
-        console.log(`Event: ${event.eventName}, Total Tasks: ${totalTasks}, Completed: ${completedTasks}, Pending: ${pendingTasks}, In Progress: ${inProgressTasks}`);
+        console.log(`Event: ${event.eventName}, Completed: ${completedTasks}, Pending: ${pendingTasks}, In Progress: ${inProgressTasks}`);
 
         return {
           eventName: event.eventName,
@@ -256,14 +252,13 @@ exports.getDetailedReport = async (req, res) => {
       }
     }));
 
-    // Filter out null results and send data
     res.status(200).json(reportData.filter(data => data !== null));
   } catch (error) {
     console.error("Error generating detailed report:", error.message);
     res.status(500).json({ error: error.message });
   }
 };
-  
+
 // Get Compiled Event Report
 exports.getCompiledReport = async (req, res) => {
     try {

@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const ReportsHome = () => {
   const [reportData, setReportData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -19,7 +22,7 @@ const ReportsHome = () => {
     setError('');
 
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/compiledReport`);
+      const response = await axios.get(`${API_BASE_URL}/compiledReport`);
       
       if (!response.data || !Array.isArray(response.data)) {
         throw new Error('Invalid data format from API.');

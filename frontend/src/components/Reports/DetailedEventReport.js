@@ -10,6 +10,9 @@ import '../../styles/ComprehensiveReport.css';
 
 ChartJS.register(ArcElement, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const DetailedEventReport = () => {
   const [eventName, setEventName] = useState('');
   const [team, setTeam] = useState('');
@@ -23,14 +26,19 @@ const DetailedEventReport = () => {
     setLoading(true);
     setError('');
     try {
-      const params = {};
+      const params = new URLSearchParams();
+      
+      // Only add filters if not initial load
       if (!isInitialLoad) {
-        if (eventName) params.eventName = eventName;
-        if (team) params.team = team;
-        if (year) params.year = year;
+        if (eventName) params.append('eventName', eventName);
+        if (team) params.append('team', team);
+        if (year) params.append('year', year);
       }
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/detailedReport`, { params });
+  
+      const response = await axios.get(`${API_BASE_URL}/detailedReport`, { params });
+      console.log("Request URL:", `${API_BASE_URL}/detailedReport?${params.toString()}`);
       console.log("Response Data:", response.data);
+  
       setReportData(response.data);
     } catch (err) {
       console.error("Error fetching detailed report:", err);

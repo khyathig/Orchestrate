@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const Login = ({ setLoggedInUser }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,28 +23,28 @@ const Login = ({ setLoggedInUser }) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
-        
+
         try {
-            const res = await axios.post("http://localhost:5000/api/auth/login", {
+            const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
                 email,
                 password,
             });
-        
+
             const user = res.data.user;
             const token = res.data.token;
-        
+
             if (!user || !token) {
                 throw new Error("Invalid response from server");
             }
-        
+
             // Store user data in localStorage
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("userEmail", user.email);
-        
+
             // Set token in Axios for further requests
-            axios.defaults.headers.common["Authorization"] = 'Bearer ${token}';
-        
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
             setLoggedInUser(user);
             navigate("/feed");
         } catch (err) {

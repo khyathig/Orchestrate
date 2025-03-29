@@ -3,6 +3,9 @@ import RazorpayButton from "./RazorpayButton";
 import "../../styles/EventFeed.css";
 import NotificationPanel from "./NotificationPanel";
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 function EventFeed({ loggedInUser }) {
   const [events, setEvents] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -24,7 +27,7 @@ function EventFeed({ loggedInUser }) {
 
       try {
         // Fetch Events
-        const eventRes = await fetch("http://localhost:5000/api/events", {
+        const eventRes = await fetch(`${API_BASE_URL}/api/events`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "User-Email": user.email,
@@ -36,7 +39,7 @@ function EventFeed({ loggedInUser }) {
         console.log("Fetched Events:", eventData); // Debugging
 
         // Fetch Tasks
-        const taskRes = await fetch("http://localhost:5000/api/tasks", {
+        const taskRes = await fetch(`${API_BASE_URL}/api/tasks`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "User-Email": user.email,
@@ -74,8 +77,8 @@ function EventFeed({ loggedInUser }) {
     try {
       const isRSVPd = event.attendees.includes(loggedInUser.name);
       const endpoint = isRSVPd 
-        ? `http://localhost:5000/api/events/${event._id}/unrsvp`
-        : `http://localhost:5000/api/events/${event._id}/rsvp`;
+        ? `${API_BASE_URL}/api/events/${event._id}/unrsvp`
+        : `${API_BASE_URL}/api/events/${event._id}/rsvp`;
 
       const response = await fetch(endpoint, {
         method: "POST",

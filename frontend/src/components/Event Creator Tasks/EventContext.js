@@ -1,6 +1,9 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 export const EventContext = createContext();
 
 export const EventProvider = ({ children }) => {
@@ -22,7 +25,7 @@ export const EventProvider = ({ children }) => {
             const userEmail = JSON.parse(user).email;
             if (!userEmail) throw new Error("User email is missing");
 
-            const response = await axios.get("http://localhost:5000/api/admin/created-events", {
+            const response = await axios.get(`${API_BASE_URL}/api/admin/created-events`, {
                 headers: { "user-email": userEmail }
             });
 
@@ -45,7 +48,7 @@ export const EventProvider = ({ children }) => {
         
         setLoadingTasks(true);
         try {
-            const response = await axios.get(`http://localhost:5000/api/admin/tasks`, {
+            const response = await axios.get(`${API_BASE_URL}/api/admin/tasks`, {
                 params: { eventID }
             });
             setSelectedEventTasks(response.data);

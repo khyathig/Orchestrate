@@ -5,6 +5,9 @@ import { TaskContext } from './TaskContext_Assignee';
 import axios from 'axios';
 //import '../../styles/TaskDetails_Assignee.css';
 
+// Use API URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const TaskDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +24,7 @@ const TaskDetails = () => {
 
     const fetchAssigneeDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/employees/${task.assignee}`);
+        const response = await axios.get(`${API_BASE_URL}/api/employees/${task.assignee}`);
         setAssigneeDetails(response.data);
         console.log("Assignee task details", response.data)
       } catch (error) {
@@ -69,7 +72,7 @@ const TaskDetails = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:5000/api/tasks/assigned/${task?._id}/comments`, // Fix: Ensure correct URL
+        `${API_BASE_URL}/api/tasks/assigned/${task?._id}/comments`, // Fix: Ensure correct URL
         { message: newComment },
         { headers: { "user-email": userEmail } }
       );
