@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const express = require("express");
 const http = require("http");
@@ -16,7 +17,7 @@ const employeeRoutes = require("./routes/employeeRoutes");
 const app = express();  //  Define app first
 const server = http.createServer(app);  //  Correct server initialization
 
-//  Initialize Socket.IO after defining `app`
+//  Initialize Socket.IO after defining app
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",  //  Allow frontend to connect
@@ -24,7 +25,7 @@ const io = new Server(server, {
   }
 });
 
-//  Attach `io` to the request object so controllers can use it
+//  Attach io to the request object so controllers can use it
 app.use((req, res, next) => {
   req.io = io;
   next();
@@ -41,7 +42,13 @@ io.on("connection", (socket) => {
 
 //  Middleware
 app.use(express.json());
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL, // Allow frontend
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "user-email"],
+    credentials: true
+}));
 app.use(bodyParser.json());
 
 //  MongoDB Connection
@@ -57,6 +64,6 @@ app.use("/api/events", eventRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/tasks", taskRoutes);
 
-// Start HTTP Server (Not `app.listen()`)
+// Start HTTP Server (Not app.listen())
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(` Server running on port ${PORT}`));

@@ -40,7 +40,7 @@ const Login = ({ setLoggedInUser }) => {
             localStorage.setItem("userEmail", user.email);
         
             // Set token in Axios for further requests
-            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            axios.defaults.headers.common["Authorization"] = 'Bearer ${token}';
         
             setLoggedInUser(user);
             navigate("/feed");

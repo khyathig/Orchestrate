@@ -1,93 +1,111 @@
-/* Ensure uniform width for input fields */
+/* General Input Fields */
 input, select, textarea {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 6px;
+    border: 1px solid #252525; /* Dark Grey */
     font-size: 16px;
-    box-sizing: border-box; /* Prevents padding from affecting width */
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle Shadow */
 }
 
-/* Align labels and inputs properly */
+/* Input Focus Effect */
+input:focus, select:focus, textarea:focus {
+    border-color: #ff7b00; /* Bright Blue */
+    outline: none;
+    box-shadow: 0px 0px 10px rgba(0, 126, 255, 0.3); /* Glow Effect */
+}
+
+/* Form Group - Consistent Alignment */
 .form-group {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
-/* Fix misalignment of textarea */
+/* Fix Textarea Misalignment */
 textarea {
-    height: 80px;
+    height: 90px;
     resize: none;
 }
 
-/* Improve layout spacing */
+/* Headings - Modern Look */
 h2, h3 {
     text-align: center;
-    color: #333;
+    color: #252525;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
-/* Ensure the form container centers everything properly */
+/* Center the Form Container */
 .form-container {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: 'Poppins', sans-serif;
+    
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 80px;
+    background-color: #ddd8d2;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Elegant Shadow */
+    font-family: 'Kanit', sans-serif;
 }
 
-/* Task Container Styling */
+/* Task Container - Modern Design */
 .task-container {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: #D4E5E8; /* Light Blue-Grey */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Inputs and Select inside Task Container */
 .task-container input,
 .task-container select {
     flex: 1;
     min-width: 140px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid #252525;
+    border-radius: 6px;
+    transition: 0.3s;
 }
 
 /* Date Picker Alignment */
 .task-container input[type="date"] {
-    padding-right: 30px; /* Space for icon */
+    padding-right: 30px; /* Space for Icon */
     background-position: right 10px center;
     background-repeat: no-repeat;
 }
 
+/* Error Messages */
 .error-message {
-    color: red;
+    color: #FF4C4C;
     font-size: 12px;
     margin-top: 2px;
 }
 
 /* Button Styling */
 .task-container button {
-    background-color: #dc3545;
+    background-color: #252525; /* Dark Grey */
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 10px 14px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: 0.3s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .task-container button:hover {
-    background-color: #a71d2a;
+    background-color: #1a1a1a;
+    transform: scale(1.05);
 }
 
 /* Button Group */
@@ -96,34 +114,54 @@ h2, h3 {
     margin-top: 20px;
 }
 
-.add-task, .submit-event {
+/* Primary Action Buttons */
+/* Common Button Styles */
+.button-common {
     color: white;
     border: none;
-    padding: 12px 18px;
-    margin: 5px;
-    border-radius: 5px;
-    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Add Task Button */
 .add-task {
-    background-color: #28a745;
+    background-color: #19D86B; /* Green */
+    padding: 10px 14px; /* Adjusted padding */
+    border-radius: 6px;
+    border: none;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .add-task:hover {
-    background-color: #218838;
+    background-color: #128B48; /* Darker Green */
     transform: scale(1.05);
 }
 
+/* Submit Event Button - Style for Create Event */
 .submit-event {
-    background-color: #007bff;
+    background-color: #007EFF; /* Bright Blue */
+    font-size: 18px; /* Increased size */
+    padding: 14px 22px; /* Bigger padding */
+    border-radius: 10px; /* Slightly larger rounded corners */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 126, 255, 0.3);
 }
 
 .submit-event:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+    background-color: #004A99; /* Darker Blue for hover */
+    transform: scale(1.08);
 }
+
+
+
+
+
 
 /* Back Link Styling */
 .back-link {
@@ -133,9 +171,18 @@ h2, h3 {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .back-link:hover {
     text-decoration: underline;
+    color: #0056b3;
 }
 
+/* Success Message */
+.success-message {
+    color: #28A745; /* Green */
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
