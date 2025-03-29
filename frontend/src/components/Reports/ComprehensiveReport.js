@@ -123,14 +123,32 @@ const ComprehensiveReport = () => {
 
   // PDF download
   const downloadPDF = () => {
-    html2canvas(reportRef.current).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, 'PNG', 10, 10, 180, 150);
-      pdf.save('Comprehensive_Event_Report.pdf');
-    });
-  };
+  const reportElement = reportRef.current;
 
+  html2canvas(reportElement, {
+    scrollY: -window.scrollY, // Corrects scrolling issues
+    scale: 2, // Higher resolution for better quality
+  }).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait, millimeters, A4 size
+    const imgWidth = 210; // A4 width in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
+    let heightLeft = imgHeight;
+    let position = 10;
+
+    pdf.addImage(imgData, 'PNG', 10, position, imgWidth - 20, 0); // Add image to the first page
+    heightLeft -= 277; // Approx height for A4 page
+
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage(); // Add a new page for the remaining content
+      pdf.addImage(imgData, 'PNG', 10, position, imgWidth - 20, 0);
+      heightLeft -= 277;
+    }
+
+    pdf.save('Comprehensive_Event_Report.pdf');
+  });
+};
   // Excel download
   const downloadExcel = () => {
     const workbook = new ExcelJS.Workbook();
