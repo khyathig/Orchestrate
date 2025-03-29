@@ -75,6 +75,7 @@
     margin-bottom: 1px;
     text-transform: uppercase;
     font-family: 'Roboto', sans-serif;
+    margin-left: 500px;
 }
 
 /* 📅 Content Wrapper (Full width for upcoming and notifications) */
@@ -98,11 +99,10 @@
 /* 📅 Event Feed (Tasks) */
 .event-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Wider cards */
+    gap: 40px; /* Reduced gap for consistency */
     width: 100%;
 }
-
 /* 🔥 Notification Panel */
 .notification-panel {
     flex: 1;
@@ -121,15 +121,15 @@
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    padding: 30px; 
+    padding: 35px; /* Increased padding for breathing space */
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     position: relative;
     width: 100%;
-    margin-bottom: 40px;  
-    
+    max-width: 600px; /* Limit card width to avoid over-stretching */
+    margin: 0 auto;
 }
 
 .event-card:hover {
@@ -138,74 +138,125 @@
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* 🗓️ Date & Venue */
-.event-card .date, 
-.event-card .venue {
-    color: #ff6200;
+/* Event Header with Title and Star */
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* Event Title */
+.event-title {
+    font-size: 22px;
     font-weight: bold;
+    color: #333;
+    margin: 0;
+    flex: 1;
 }
 
 /* ⭐ Star Icon */
-.event-card .star {
+.star-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color: #ccc;
+    transition: all 0.2s ease;
+    margin-left: 15px;
+}
+
+.star-icon:hover {
+    transform: scale(1.2);
+}
+
+.star-icon.starred {
+    color: #ffc107;
+}
+
+/* Event Description */
+.event-card p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* Event Past Message */
+.event-past {
     color: #ff6200;
-    font-size: 24px;
+    font-style: italic;
+    margin-top: 10px;
 }
 
-/* 🔥 Notification Card */
-.notification-panel .notification {
-    background: #ffffff;
+/* RSVP Button */
+.rsvp-button {
+    background-color: #ff6200;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-left: 4px solid #ff6200;
+    cursor: pointer;
+    font-weight: bold;
     transition: all 0.3s ease;
-    color: #333;
+    margin-top: 10px;
+    align-self: flex-start;
 }
 
-.notification-panel .notification:hover {
-    background: #fdf1e6;
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+.rsvp-button:hover {
+    background-color: #e55a00;
+    transform: translateY(-2px);
+}
+
+.rsvp-button.rsvped {
+    background-color: #4CAF50;
 }
 
 /* 📱 Responsive Design */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
     .content-wrapper {
-        flex-direction: column;  
-        gap: 40px;
+        flex-direction: column;
     }
 
     .event-feed {
-        grid-template-columns: 1fr;
-        gap: 50px;
+        width: 100%;
     }
 
     .notification-panel {
         max-width: 100%;
+        width: 100%;
+    }
+    
+    .event-card {
+        min-width: auto;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .filter-search-container {
-        flex-direction: column;
-        gap: 15px;
+    .event-feed-container {
+        padding: 20px;
+        padding-top: 100px;
     }
-
-    .search-input, .filter-dropdown {
+    
+    .filter-search-inline {
+        padding: 15px;
+    }
+    
+    .search-input, 
+    .filter-dropdown {
         width: 100%;
     }
-
-    .event-feed {
-        grid-template-columns: 1fr;  
-        gap: 50px;  
+    
+    .section-title {
+        font-size: 30px;
     }
-
+    
     .event-card {
-        padding: 25px;
-        width: 100%;  
+        padding: 20px;
     }
-
-    .notification-panel {
-        width: 100%;
+    
+    .event-title {
+        font-size: 20px;
+    }
+    
+    .star-icon {
+        font-size: 24px;
     }
 }
