@@ -1,0 +1,42 @@
+.task-card {
+  height: auto; /* Allow card height to expand */
+  min-height: 100px; /* Ensure a base height */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Allow text to wrap instead of being cut off */
+.task-card h3,
+.task-card p {
+  font-size: 14px;
+  color: #333;
+  white-space: normal; /* Allow text wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+/* Button should stay at the bottom */
+.task-card button {
+  align-self: flex-end; /* Keep button to the right */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}

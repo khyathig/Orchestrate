@@ -1,0 +1,180 @@
+[{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7942"
+  },
+  "name": "Alice",
+  "email": "alice@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "admin",
+  "team": "HR"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7943"
+  },
+  "name": "Bob",
+  "email": "bob@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Tech"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7944"
+  },
+  "name": "Charlie",
+  "email": "charlie@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Marketing"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7945"
+  },
+  "name": "David",
+  "email": "david@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Finance"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7946"
+  },
+  "name": "Eve",
+  "email": "eve@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "admin",
+  "team": "Operations"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7947"
+  },
+  "name": "Frank",
+  "email": "frank@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "HR"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7948"
+  },
+  "name": "Grace",
+  "email": "grace@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Tech"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d7949"
+  },
+  "name": "Hank",
+  "email": "hank@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Marketing"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d794a"
+  },
+  "name": "Ivy",
+  "email": "ivy@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Finance"
+},
+{
+  "_id": {
+    "$oid": "67d3978c9ea90221504d794b"
+  },
+  "name": "Jack",
+  "email": "jack@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Operations"
+},
+{
+  "_id": {
+    "$oid": "67d3cccbc2f2a82631836734"
+  },
+  "name": "Anushka Sarkar",
+  "email": "anushka.sarkar@desisascendeducare.in",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Tech"
+},
+{
+  "_id": {
+    "$oid": "67d3ce953756b6a39c4d7942"
+  },
+  "name": "Khyathi Gutta",
+  "email": "khyathi.gutta@desisascendeducare.in",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "admin",
+  "team": "HR"
+},
+{
+  "_id": {
+    "$oid": "67d5208a250bf3e2367a96b7"
+  },
+  "name": "Jane Doe",
+  "email": "janedoe@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "employee",
+  "team": "Marketing"
+},
+{
+  "_id": {
+    "$oid": "67d3f0b5a482b72d786f3123"
+  },
+  "name": "Olivia",
+  "email": "olivia@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "manager",
+  "team": "HR"
+},
+{
+  "_id": {
+    "$oid": "67d3f0b5a482b72d786f3124"
+  },
+  "name": "Noah",
+  "email": "noah@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "manager",
+  "team": "Tech"
+},
+{
+  "_id": {
+    "$oid": "67d3f0b5a482b72d786f3125"
+  },
+  "name": "Sophia",
+  "email": "sophia@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "manager",
+  "team": "Marketing"
+},
+{
+  "_id": {
+    "$oid": "67d3f0b5a482b72d786f3126"
+  },
+  "name": "Liam",
+  "email": "liam@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "manager",
+  "team": "Finance"
+},
+{
+  "_id": {
+    "$oid": "67d3f0b5a482b72d786f3127"
+  },
+  "name": "Mia",
+  "email": "mia@example.com",
+  "password": "$2b$10$IXPio/P2uWwSzxm0ABaQZ.icoDbRxO4EkCiBgmJY.KHC36pkun3zW",
+  "role": "admin",
+  "team": "Finance"
+}]

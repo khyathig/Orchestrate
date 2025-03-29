@@ -1,0 +1,211 @@
+/* 🌐 Page Background */
+.event-feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    background: #f5eeee;  
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+    padding-top: 120px; /* Ensure content is below navbar */
+}
+
+/* 🔍 Search & Filter Section */
+.filter-search-container {
+    display: flex;
+    justify-content: flex-start;  
+    align-items: center;
+    gap: 25px;  
+    flex-wrap: wrap;
+    background: #f3f3f3;  
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* 🔍 Search Input */
+.search-input {
+    padding: 12px 20px;
+    width: 320px;  
+    border: 1px solid #b0b0b0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    max-width: 100%;
+    background: #ffffff;
+    color: #333;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #ff6200;
+    box-shadow: 0 0 10px rgba(255, 98, 0, 0.5);
+}
+
+/* 🔽 Filter Dropdown */
+.filter-dropdown {
+    padding: 12px 20px;
+    border: 1px solid #b0b0b0;
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    max-width: 220px;
+    color: #333;
+}
+
+.filter-dropdown:hover {
+    background: #ff6200;
+    color: #fff;
+}
+
+/* 🛠️ Section Titles */
+.section-title {
+    font-size: 40px;
+    font-weight: bold;
+    color:black ;
+    text-align: left;
+    margin-bottom: 1px;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* 📅 Content Wrapper (Full width for upcoming and notifications) */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* 📅 Event Section */
+.event-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 4;
+    width: 100%;
+}
+
+/* 📅 Event Feed (Tasks) */
+.event-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 50px;
+    width: 100%;
+}
+
+/* 🔥 Notification Panel */
+.notification-panel {
+    flex: 1;
+    min-width: 350px;
+    background: #f3f3f3;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: fit-content;
+}
+
+/* 📄 Event Card */
+.event-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px; 
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;  
+    
+}
+
+.event-card:hover {
+    background: #fdf1e6;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 🗓️ Date & Venue */
+.event-card .date, 
+.event-card .venue {
+    color: #ff6200;
+    font-weight: bold;
+}
+
+/* ⭐ Star Icon */
+.event-card .star {
+    color: #ff6200;
+    font-size: 24px;
+}
+
+/* 🔥 Notification Card */
+.notification-panel .notification {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 4px solid #ff6200;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.notification-panel .notification:hover {
+    background: #fdf1e6;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 📱 Responsive Design */
+@media screen and (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column;  
+        gap: 40px;
+    }
+
+    .event-feed {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .notification-panel {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .filter-search-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-input, .filter-dropdown {
+        width: 100%;
+    }
+
+    .event-feed {
+        grid-template-columns: 1fr;  
+        gap: 50px;  
+    }
+
+    .event-card {
+        padding: 25px;
+        width: 100%;  
+    }
+
+    .notification-panel {
+        width: 100%;
+    }
+}

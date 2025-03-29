@@ -1,0 +1,1153 @@
+[{
+  "_id": {
+    "$oid": "67d3aa7fa3230126f64d7942"
+  },
+  "eventName": "Annual Tech Summit",
+  "eventType": "firm-wide",
+  "date": "2025-10-12",
+  "venue": "Auditorium",
+  "description": "Tech innovations and talks",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 1800
+},
+{
+  "_id": {
+    "$oid": "67d96b36f28338d69de149f6"
+  },
+  "eventName": "Guest Lecture",
+  "eventType": "firm-wide",
+  "date": "2025-03-27",
+  "venue": "Auditorium",
+  "description": "Guest Lecture ",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 0
+},
+{
+  "_id": {
+    "$oid": "52e65bd6eb804ce0a5a33052"
+  },
+  "eventName": "Training workshop",
+  "eventType": "firm-wide",
+  "date": "2021-08-10",
+  "venue": "Tech Hall",
+  "description": "Training workshop",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Jane Doe",
+    "Charlie",
+    "Ivy",
+    "Jack",
+    "Alice",
+    "Anushka Sarkar",
+    "Hank",
+    "Eve",
+    "Bob",
+    "Khyathi Gutta",
+    "Frank"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 7829
+},
+{
+  "_id": {
+    "$oid": "9f7b627a3e484a2c8884c0a3"
+  },
+  "eventName": "Training workshop",
+  "eventType": "team-specific",
+  "date": "2021-04-14",
+  "venue": "Conference Room",
+  "description": "Training workshop",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Hank",
+    "Bob",
+    "Frank",
+    "Jane Doe",
+    "Anushka Sarkar",
+    "David",
+    "Ivy",
+    "Eve"
+  ],
+  "team": "Finance",
+  "isPaid": false,
+  "creator": "liam@example.com",
+  "totalBudget": 6112
+},
+{
+  "_id": {
+    "$oid": "b6ff927f68f14ab5bb9a7ed1"
+  },
+  "eventName": "Training workshop",
+  "eventType": "firm-wide",
+  "date": "2021-04-07",
+  "venue": "Outdoor Park",
+  "description": "Training workshop",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Anushka Sarkar",
+    "Ivy",
+    "Jane Doe",
+    "Eve",
+    "Jack",
+    "David",
+    "Bob",
+    "Grace",
+    "Frank",
+    "Hank"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 6540
+},
+{
+  "_id": {
+    "$oid": "8ef9c9ebd14e456780908fe5"
+  },
+  "eventName": "Training workshop",
+  "eventType": "firm-wide",
+  "date": "2022-04-15",
+  "venue": "Tech Hall",
+  "description": "Training workshop",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Bob",
+    "Hank",
+    "David",
+    "Jane Doe",
+    "Alice",
+    "Khyathi Gutta",
+    "Frank",
+    "Charlie"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 6883
+},
+{
+  "_id": {
+    "$oid": "ed2273c7a16443f48a47ec56"
+  },
+  "eventName": "Networking event",
+  "eventType": "team-specific",
+  "date": "2022-12-06",
+  "venue": "Auditorium",
+  "description": "Training workshop",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Jane Doe",
+    "Alice",
+    "Jack",
+    "David",
+    "Bob",
+    "Anushka Sarkar",
+    "Frank",
+    "Ivy"
+  ],
+  "team": "Marketing",
+  "isPaid": false,
+  "creator": "sophia@example.com",
+  "totalBudget": 7360
+},
+{
+  "_id": {
+    "$oid": "5bf3ed50224c4255ba53a565"
+  },
+  "eventName": "Training workshop",
+  "eventType": "firm-wide",
+  "date": "2021-11-17",
+  "venue": "Outdoor Park",
+  "description": "Training workshop",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Khyathi Gutta",
+    "Grace",
+    "Anushka Sarkar",
+    "Ivy",
+    "Alice",
+    "Jane Doe"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 12329
+},
+{
+  "_id": {
+    "$oid": "fbac7bacebf648e4bc8cce45"
+  },
+  "eventName": "Charity event",
+  "eventType": "firm-wide",
+  "date": "2022-12-08",
+  "venue": "Outdoor Park",
+  "description": "Charity event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Jack",
+    "Ivy",
+    "Eve",
+    "Charlie",
+    "Grace",
+    "David",
+    "Jane Doe",
+    "Bob",
+    "Alice",
+    "Frank",
+    "Hank",
+    "Anushka Sarkar",
+    "Khyathi Gutta"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 5476
+},
+{
+  "_id": {
+    "$oid": "dd7e47f65e5d48adb50585c2"
+  },
+  "eventName": "Networking event",
+  "eventType": "firm-wide",
+  "date": "2022-08-26",
+  "venue": "Resort",
+  "description": "Charity event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Jack",
+    "Eve",
+    "Bob",
+    "Grace",
+    "David",
+    "Hank",
+    "Anushka Sarkar",
+    "Alice"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 7066
+},
+{
+  "_id": {
+    "$oid": "13964a0aae314f0f84cc699b"
+  },
+  "eventName": "Training workshop",
+  "eventType": "team-specific",
+  "date": "2022-07-22",
+  "venue": "Auditorium",
+  "description": "Charity event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Eve",
+    "Ivy",
+    "Frank",
+    "Grace",
+    "Jane Doe",
+    "David",
+    "Bob"
+  ],
+  "team": "Operations",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 5656
+},
+{
+  "_id": {
+    "$oid": "d761a1f39fcc47b69e2a084e"
+  },
+  "eventName": "Training workshop",
+  "eventType": "limited-entry",
+  "date": "2022-09-25",
+  "venue": "Tech Hall",
+  "description": "Annual gathering",
+  "availableSlots": 77,
+  "ticketPrice": 118,
+  "attendees": [
+    "Frank",
+    "Jack",
+    "Ivy",
+    "Charlie",
+    "Bob",
+    "Khyathi Gutta",
+    "Anushka Sarkar",
+    "David",
+    "Jane Doe",
+    "Eve",
+    "Hank",
+    "Grace"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 6554
+},
+{
+  "_id": {
+    "$oid": "0bbe431fe68f4a62b85ea974"
+  },
+  "eventName": "Charity event",
+  "eventType": "team-specific",
+  "date": "2022-03-02",
+  "venue": "Conference Room",
+  "description": "Training workshop",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Alice",
+    "Grace",
+    "Charlie",
+    "Jane Doe",
+    "Bob",
+    "Hank"
+  ],
+  "team": "Operations",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 16150
+},
+{
+  "_id": {
+    "$oid": "c2e7f10ed0e94d9085d1aa2d"
+  },
+  "eventName": "Celebration night",
+  "eventType": "limited-entry",
+  "date": "2022-04-19",
+  "venue": "Tech Hall",
+  "description": "Training workshop",
+  "availableSlots": 80,
+  "ticketPrice": 193,
+  "attendees": [
+    "Alice",
+    "Jack",
+    "Eve",
+    "Charlie",
+    "Hank",
+    "Anushka Sarkar",
+    "Khyathi Gutta",
+    "Bob",
+    "Grace",
+    "Frank",
+    "David",
+    "Jane Doe",
+    "Ivy"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 6747
+},
+{
+  "_id": {
+    "$oid": "0a187b153fa846718b904fcc"
+  },
+  "eventName": "Annual gathering",
+  "eventType": "limited-entry",
+  "date": "2023-02-15",
+  "venue": "Conference Room",
+  "description": "Celebration night",
+  "availableSlots": 52,
+  "ticketPrice": 118,
+  "attendees": [
+    "Khyathi Gutta",
+    "Anushka Sarkar",
+    "David",
+    "Ivy",
+    "Grace",
+    "Jane Doe",
+    "Eve",
+    "Bob",
+    "Frank",
+    "Jack",
+    "Alice",
+    "Hank",
+    "Charlie"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 11611
+},
+{
+  "_id": {
+    "$oid": "2528b020cdfe41d9824df965"
+  },
+  "eventName": "Celebration night",
+  "eventType": "limited-entry",
+  "date": "2023-09-12",
+  "venue": "Auditorium",
+  "description": "Celebration night",
+  "availableSlots": 99,
+  "ticketPrice": 183,
+  "attendees": [
+    "Frank",
+    "Anushka Sarkar",
+    "Bob",
+    "Alice",
+    "David",
+    "Charlie",
+    "Jack",
+    "Grace",
+    "Khyathi Gutta",
+    "Eve",
+    "Ivy",
+    "Hank"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 10755
+},
+{
+  "_id": {
+    "$oid": "bab79235063546e4a514fe0d"
+  },
+  "eventName": "Celebration night",
+  "eventType": "team-specific",
+  "date": "2023-01-12",
+  "venue": "Tech Hall",
+  "description": "Celebration night",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Bob",
+    "Anushka Sarkar",
+    "Alice",
+    "Eve",
+    "Jane Doe",
+    "Ivy",
+    "Jack",
+    "Hank",
+    "Charlie",
+    "Frank",
+    "David",
+    "Grace",
+    "Khyathi Gutta"
+  ],
+  "team": "Marketing",
+  "isPaid": false,
+  "creator": "sophia@example.com",
+  "totalBudget": 5909
+},
+{
+  "_id": {
+    "$oid": "059ebebc85a44797ab4a9d6c"
+  },
+  "eventName": "Celebration night",
+  "eventType": "limited-entry",
+  "date": "2023-11-27",
+  "venue": "Outdoor Park",
+  "description": "Celebration night",
+  "availableSlots": 38,
+  "ticketPrice": 97,
+  "attendees": [
+    "David",
+    "Eve",
+    "Grace",
+    "Anushka Sarkar",
+    "Jack",
+    "Hank",
+    "Khyathi Gutta",
+    "Ivy",
+    "Alice",
+    "Bob",
+    "Charlie",
+    "Frank"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 13701
+},
+{
+  "_id": {
+    "$oid": "f6a290e623154932a9d9d727"
+  },
+  "eventName": "Networking event",
+  "eventType": "team-specific",
+  "date": "2023-10-03",
+  "venue": "Resort",
+  "description": "Annual gathering",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Alice",
+    "Charlie",
+    "Jack",
+    "Anushka Sarkar",
+    "Khyathi Gutta",
+    "Ivy",
+    "David",
+    "Eve",
+    "Bob",
+    "Grace",
+    "Frank",
+    "Jane Doe",
+    "Hank"
+  ],
+  "team": "Finance",
+  "isPaid": false,
+  "creator": "liam@example.com",
+  "totalBudget": 8291
+},
+{
+  "_id": {
+    "$oid": "3678a641651e42a48d6ab9cc"
+  },
+  "eventName": "Networking event",
+  "eventType": "limited-entry",
+  "date": "2023-12-06",
+  "venue": "Tech Hall",
+  "description": "Annual gathering",
+  "availableSlots": 33,
+  "ticketPrice": 119,
+  "attendees": [
+    "Charlie",
+    "Jack",
+    "Khyathi Gutta",
+    "Ivy",
+    "Eve",
+    "Jane Doe",
+    "Anushka Sarkar",
+    "Hank"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 11935
+},
+{
+  "_id": {
+    "$oid": "d44dd9f26f374429b5f1876a"
+  },
+  "eventName": "Charity event",
+  "eventType": "limited-entry",
+  "date": "2023-08-03",
+  "venue": "Outdoor Park",
+  "description": "Networking event",
+  "availableSlots": 81,
+  "ticketPrice": 20,
+  "attendees": [
+    "Eve",
+    "Frank",
+    "Grace",
+    "Bob",
+    "Alice",
+    "Jane Doe",
+    "Hank",
+    "Khyathi Gutta"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 2430
+},
+{
+  "_id": {
+    "$oid": "9d36c70d37b34c4991264eb2"
+  },
+  "eventName": "Networking event",
+  "eventType": "limited-entry",
+  "date": "2021-10-24",
+  "venue": "Resort",
+  "description": "Charity event",
+  "availableSlots": 33,
+  "ticketPrice": 135,
+  "attendees": [
+    "David",
+    "Anushka Sarkar",
+    "Jack",
+    "Frank",
+    "Alice",
+    "Hank",
+    "Ivy",
+    "Charlie"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 7056
+},
+{
+  "_id": {
+    "$oid": "d4da224279ee42e881450ff5"
+  },
+  "eventName": "Celebration night",
+  "eventType": "firm-wide",
+  "date": "2021-11-05",
+  "venue": "Outdoor Park",
+  "description": "Annual gathering",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Hank",
+    "Anushka Sarkar",
+    "Ivy",
+    "Khyathi Gutta",
+    "Grace",
+    "Eve",
+    "Jane Doe"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 11691
+},
+{
+  "_id": {
+    "$oid": "67d3aa7fa3230126f64d7944"
+  },
+  "eventName": "Team Outing",
+  "eventType": "limited-entry",
+  "date": "2025-09-09",
+  "venue": "Resort",
+  "description": "Fun team bonding",
+  "availableSlots": 17,
+  "ticketPrice": 100,
+  "attendees": [
+    "Alice",
+    "Charlie",
+    "Khyathi Gutta"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 1800
+},
+{
+  "_id": {
+    "$oid": "7bef5c5d698b4a878a824994"
+  },
+  "eventName": "Annual gathering",
+  "eventType": "limited-entry",
+  "date": "2021-11-20",
+  "venue": "Resort",
+  "description": "Annual gathering",
+  "availableSlots": 92,
+  "ticketPrice": 160,
+  "attendees": [
+    "Jane Doe",
+    "Eve",
+    "Jack",
+    "Khyathi Gutta",
+    "Bob",
+    "Frank"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 7909
+},
+{
+  "_id": {
+    "$oid": "67d910650f592fdf0560a666"
+  },
+  "eventName": "Tech Conference",
+  "eventType": "limited-entry",
+  "date": "2025-04-20",
+  "venue": "Tech Hall",
+  "description": "Annual Tech Conference",
+  "availableSlots": 98,
+  "ticketPrice": 50,
+  "attendees": [
+    "Alice",
+    "Khyathi Gutta"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 0
+},
+{
+  "_id": {
+    "$oid": "3cdce50398c84ab397979781"
+  },
+  "eventName": "Charity event",
+  "eventType": "team-specific",
+  "date": "2021-11-11",
+  "venue": "Auditorium",
+  "description": "Networking event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Anushka Sarkar",
+    "Alice",
+    "Jane Doe",
+    "Khyathi Gutta",
+    "Jack",
+    "Eve",
+    "Grace",
+    "David",
+    "Frank",
+    "Bob",
+    "Charlie",
+    "Hank",
+    "Ivy"
+  ],
+  "team": "Finance",
+  "isPaid": false,
+  "creator": "liam@example.com",
+  "totalBudget": 5726
+},
+{
+  "_id": {
+    "$oid": "67d3aa7fa3230126f64d7943"
+  },
+  "eventName": "Tech Strategy Workshop",
+  "eventType": "team-specific",
+  "date": "2025-07-07",
+  "venue": "Conference Room 3",
+  "description": "Advanced marketing techniques",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [],
+  "team": "Tech",
+  "isPaid": false,
+  "creator": "noah@example.com",
+  "totalBudget": 500
+},
+{
+  "_id": {
+    "$oid": "67d5504aa9d8eed023f10f81"
+  },
+  "eventName": "Crafts Workshop",
+  "eventType": "limited-entry",
+  "date": "2025-03-27",
+  "venue": "",
+  "description": "Arts and Crafts Workshop",
+  "availableSlots": 29,
+  "ticketPrice": 500,
+  "attendees": [
+    "Khyathi Gutta"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 15000
+},
+{
+  "_id": {
+    "$oid": "7af1c325d66a403fa54d02be"
+  },
+  "eventName": "Networking event",
+  "eventType": "firm-wide",
+  "date": "2021-05-15",
+  "venue": "Resort",
+  "description": "Networking event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Ivy",
+    "Jane Doe",
+    "Bob",
+    "Eve",
+    "Charlie",
+    "Frank",
+    "Alice",
+    "Hank",
+    "Anushka Sarkar",
+    "Khyathi Gutta",
+    "David",
+    "Jack",
+    "Grace"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 12396
+},
+{
+  "_id": {
+    "$oid": "e7df3b5b8baf4d83be295881"
+  },
+  "eventName": "Networking event",
+  "eventType": "limited-entry",
+  "date": "2021-09-08",
+  "venue": "Conference Room",
+  "description": "Training workshop",
+  "availableSlots": 78,
+  "ticketPrice": 175,
+  "attendees": [
+    "Frank",
+    "Jack",
+    "Jane Doe",
+    "Alice",
+    "David"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 5651
+},
+{
+  "_id": {
+    "$oid": "e859457e619d44d3b32dfdc2"
+  },
+  "eventName": "Networking event",
+  "eventType": "firm-wide",
+  "date": "2023-07-28",
+  "venue": "Outdoor Park",
+  "description": "Charity event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Alice",
+    "Anushka Sarkar",
+    "Ivy",
+    "Grace",
+    "Bob",
+    "Jane Doe"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 5218
+},
+{
+  "_id": {
+    "$oid": "daa1c641ef7c4927befc3748"
+  },
+  "eventName": "Networking event",
+  "eventType": "firm-wide",
+  "date": "2021-11-22",
+  "venue": "Auditorium",
+  "description": "Annual gathering",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Frank",
+    "Khyathi Gutta",
+    "Ivy",
+    "Eve",
+    "Charlie",
+    "Anushka Sarkar",
+    "Jack",
+    "Grace",
+    "David",
+    "Bob",
+    "Alice",
+    "Jane Doe",
+    "Hank"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 13208
+},
+{
+  "_id": {
+    "$oid": "67d981ea94f5944a70248d33"
+  },
+  "eventName": "Team Dinner",
+  "eventType": "team-specific",
+  "date": "2025-03-27",
+  "venue": "Restaurant",
+  "description": "Team Dinner",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [],
+  "team": "Tech",
+  "isPaid": false,
+  "creator": "noah@example.com",
+  "totalBudget": 20
+},
+{
+  "_id": {
+    "$oid": "2a24f75cc3be448a8983596a"
+  },
+  "eventName": "Charity event",
+  "eventType": "firm-wide",
+  "date": "2023-10-06",
+  "venue": "Outdoor Park",
+  "description": "Networking event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Eve",
+    "Khyathi Gutta",
+    "Charlie",
+    "Hank",
+    "Jack",
+    "Bob",
+    "David",
+    "Alice",
+    "Ivy"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 14990
+},
+{
+  "_id": {
+    "$oid": "b23aa8dd798a4fe9a2ea2980"
+  },
+  "eventName": "Annual gathering",
+  "eventType": "firm-wide",
+  "date": "2024-08-27",
+  "venue": "Auditorium",
+  "description": "Charity event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Bob",
+    "Ivy",
+    "Grace",
+    "Frank",
+    "Alice",
+    "David"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 8336
+},
+{
+  "_id": {
+    "$oid": "ac4f374bf28446489358e4e8"
+  },
+  "eventName": "Annual gathering",
+  "eventType": "firm-wide",
+  "date": "2024-03-14",
+  "venue": "Resort",
+  "description": "Annual gathering",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Jane Doe",
+    "Grace",
+    "David",
+    "Khyathi Gutta",
+    "Anushka Sarkar",
+    "Hank",
+    "Frank",
+    "Charlie"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 13214
+},
+{
+  "_id": {
+    "$oid": "8965dc28079f44cd97efeacd"
+  },
+  "eventName": "Charity event",
+  "eventType": "firm-wide",
+  "date": "2024-08-09",
+  "venue": "Conference Room",
+  "description": "Celebration night",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Hank",
+    "Jane Doe",
+    "Bob",
+    "Eve",
+    "Jack",
+    "Frank",
+    "David",
+    "Ivy",
+    "Khyathi Gutta",
+    "Alice",
+    "Charlie",
+    "Anushka Sarkar"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 6043
+},
+{
+  "_id": {
+    "$oid": "28c66b9bfd1a4814883fd29d"
+  },
+  "eventName": "Annual gathering",
+  "eventType": "team-specific",
+  "date": "2024-12-06",
+  "venue": "Auditorium",
+  "description": "Celebration night",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Khyathi Gutta",
+    "Charlie",
+    "Ivy",
+    "Anushka Sarkar",
+    "Grace",
+    "Frank",
+    "Hank",
+    "Bob"
+  ],
+  "team": "HR",
+  "isPaid": false,
+  "creator": "olivia@example.com",
+  "totalBudget": 9762
+},
+{
+  "_id": {
+    "$oid": "84c686eebbdc4d1cb4ed88cf"
+  },
+  "eventName": "Charity event",
+  "eventType": "team-specific",
+  "date": "2023-05-21",
+  "venue": "Outdoor Park",
+  "description": "Charity event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Alice",
+    "Hank",
+    "Charlie",
+    "Anushka Sarkar",
+    "Ivy",
+    "Jane Doe"
+  ],
+  "team": "Tech",
+  "isPaid": false,
+  "creator": "noah@example.com",
+  "totalBudget": 6767
+},
+{
+  "_id": {
+    "$oid": "016e9580572b4ca0b5599f7f"
+  },
+  "eventName": "Training workshop",
+  "eventType": "team-specific",
+  "date": "2024-04-06",
+  "venue": "Auditorium",
+  "description": "Networking event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Khyathi Gutta",
+    "David",
+    "Frank",
+    "Jack",
+    "Charlie",
+    "Jane Doe",
+    "Hank",
+    "Eve",
+    "Alice",
+    "Anushka Sarkar",
+    "Grace"
+  ],
+  "team": "Finance",
+  "isPaid": false,
+  "creator": "liam@example.com",
+  "totalBudget": 9787
+},
+{
+  "_id": {
+    "$oid": "5f034de2c3c84ba393e759ba"
+  },
+  "eventName": "Charity event",
+  "eventType": "firm-wide",
+  "date": "2024-11-17",
+  "venue": "Conference Room",
+  "description": "Networking event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Anushka Sarkar",
+    "Jack",
+    "Hank",
+    "Alice",
+    "Frank",
+    "Grace",
+    "David",
+    "Charlie",
+    "Eve",
+    "Jane Doe",
+    "Khyathi Gutta",
+    "Bob",
+    "Ivy"
+  ],
+  "team": "",
+  "isPaid": false,
+  "creator": "alice@example.com",
+  "totalBudget": 9045
+},
+{
+  "_id": {
+    "$oid": "d9aeb7a311f64d0e905d012b"
+  },
+  "eventName": "Annual gathering",
+  "eventType": "team-specific",
+  "date": "2024-04-02",
+  "venue": "Outdoor Park",
+  "description": "Charity event",
+  "availableSlots": null,
+  "ticketPrice": null,
+  "attendees": [
+    "Anushka Sarkar",
+    "Grace",
+    "Alice",
+    "Khyathi Gutta",
+    "Ivy",
+    "Jack",
+    "David",
+    "Hank",
+    "Frank",
+    "Bob",
+    "Charlie",
+    "Eve",
+    "Jane Doe"
+  ],
+  "team": "Finance",
+  "isPaid": false,
+  "creator": "liam@example.com",
+  "totalBudget": 8951
+},
+{
+  "_id": {
+    "$oid": "b4c32b98fb47462f89b06b42"
+  },
+  "eventName": "Charity event",
+  "eventType": "limited-entry",
+  "date": "2024-02-14",
+  "venue": "Tech Hall",
+  "description": "Celebration night",
+  "availableSlots": 29,
+  "ticketPrice": 194,
+  "attendees": [
+    "Ivy",
+    "Jack",
+    "Eve",
+    "Anushka Sarkar",
+    "Grace",
+    "Alice",
+    "Khyathi Gutta",
+    "Jane Doe",
+    "Charlie",
+    "David",
+    "Bob",
+    "Hank",
+    "Frank"
+  ],
+  "team": "",
+  "isPaid": true,
+  "creator": "alice@example.com",
+  "totalBudget": 3510
+}]

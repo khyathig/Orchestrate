@@ -1,0 +1,45 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  padding: 120px;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar button.active {
+  background-color: #007bff;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.task-list, .event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event-card {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+}
