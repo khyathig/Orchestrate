@@ -155,50 +155,49 @@ function EventFeed({ loggedInUser }) {
 
   return (
     <div className="event-feed-container">
+      <h2 className="section-title">Events</h2> {/* Moved here */}
+  
       <div className="filter-search-inline">
-      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-
-        <input
-          type="text"
-          placeholder="Search events by name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
-        <select
-          className="filter-dropdown"
-          value={selectedFilter}
-          onChange={(e) => setSelectedFilter(e.target.value)}
-        >
-          <option value="All Events">All Events</option>
-          <option value="RSVP'd">RSVP'd</option>
-          <option value="Starred">Starred</option>
-        </select>
-        <select
-          className="filter-dropdown"
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-        >
-          <option value="All Years">All Years</option>
-          {[...new Set(events.map((event) => new Date(event.date).getFullYear().toString()))].map((year) => (
-            <option key={year} value={year}>{year}</option>
-          ))}
-        </select>
-        <select
-          className="filter-dropdown"
-          value={selectedEventType}
-          onChange={(e) => setSelectedEventType(e.target.value)}
-        >
-          <option value="All Types">All Event Types</option>
-          {[...new Set(events.map((event) => event.eventType))].map((type) => (
-            <option key={type} value={type}>{type}</option>
-          ))}
-        </select>
+        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+          <input
+            type="text"
+            placeholder="Search events by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          <select
+            className="filter-dropdown"
+            value={selectedFilter}
+            onChange={(e) => setSelectedFilter(e.target.value)}
+          >
+            <option value="All Events">All Events</option>
+            <option value="RSVP'd">RSVP'd</option>
+            <option value="Starred">Starred</option>
+          </select>
+          <select
+            className="filter-dropdown"
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+          >
+            <option value="All Years">All Years</option>
+            {[...new Set(events.map((event) => new Date(event.date).getFullYear().toString()))].map((year) => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
+          <select
+            className="filter-dropdown"
+            value={selectedEventType}
+            onChange={(e) => setSelectedEventType(e.target.value)}
+          >
+            <option value="All Types">All Event Types</option>
+            {[...new Set(events.map((event) => event.eventType))].map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
+        </div>
       </div>
-      </div>
-
-      <h2 className="section-title">Events</h2>
-
+  
       <div className="content-wrapper">
         <div className="event-feed">
           <div className="event-list">
@@ -207,7 +206,6 @@ function EventFeed({ loggedInUser }) {
             ) : (
               filteredEvents.map((event) => (
                 <div key={event._id} className="event-card">
-          
                   <div className="event-header">
                     <h3 className="event-title">{event.eventName}</h3>
                     <span
@@ -218,11 +216,11 @@ function EventFeed({ loggedInUser }) {
                       {starredEvents.has(event._id) ? "⭐" : "☆"}
                     </span>
                   </div>
-
+  
                   <p>{event.description}</p>
                   <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString("en-GB")}</p>
                   <p><strong>Venue:</strong> {event.venue}</p>
-
+  
                   {event.eventType === "limited-entry" && (
                     <>
                       {event.availableSlots !== null && (
@@ -233,7 +231,7 @@ function EventFeed({ loggedInUser }) {
                       )}
                     </>
                   )}
-
+  
                   {isEventInPast(event.date) ? (
                     <p className="event-past">This event has already passed.</p>
                   ) : (
@@ -255,14 +253,14 @@ function EventFeed({ loggedInUser }) {
             )}
           </div>
         </div>
-
+  
         <div className="notification-panel">
           <h2>Notifications</h2>
           <NotificationPanel loggedInUser={loggedInUser} />
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default EventFeed;
