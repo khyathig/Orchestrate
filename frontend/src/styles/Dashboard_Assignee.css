@@ -1,27 +1,40 @@
-/* Filters Section - Only Dropdowns */
+/* Filters Section - Improved Layout with "Filter by Event" below */
+.dashboard {
+  padding: 120px 20px 20px;  /* Increased top padding to push content below the navbar */
+  min-height: 100vh;         /* Ensure full-page height */
+  box-sizing: border-box;    /* Include padding in the total height */
+}
 .filters {
   display: flex;
+  flex-wrap: wrap;       /* Allow wrapping to move items below */
   justify-content: center;
-  align-items: center;
-  gap: 15px;
+  align-items: center;   /* Vertical alignment */
+  gap: 12px;
   margin-bottom: 20px;
 }
 
-/* Dropdown Styling */
+/* Ensuring consistent size and style */
 .filters input, 
 .filters select {
-  padding: 10px 15px;    
-  font-size: 16px;        
+  padding: 8px 14px;    
+  font-size: 14px;      
   border: 1px solid #ccc;
   border-radius: 5px;
   transition: 0.3s;
   background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 220px;          /* Uniform width */
-  height: 44px;          /* Slightly taller for consistency */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 220px;        
+  height: 42px;        
 }
 
-/* Hover & Focus Effects */
+/* Move the "Filter by Event" dropdown to a new line */
+.filters select:last-child {
+  flex-basis: 100%;      /* Force it to a new row */
+  max-width: 320px;      /* Adjust width */
+  margin-top: 10px;      /* Add some space from the filters above */
+}
+
+/* Add hover and focus effects */
 .filters input:hover, 
 .filters select:hover {
   border-color: #FF7B00; /* Orange border on hover */
@@ -31,19 +44,36 @@
 .filters select:focus {
   outline: none;
   border-color: #FF7B00; 
-  box-shadow: 0 0 10px rgba(255, 123, 0, 0.5);
+  box-shadow: 0 0 8px rgba(255, 123, 0, 0.5);
 }
 
-/* Responsive Layout */
+/* Bold and Stylish Heading */
+.dashboard h1 {
+  font-size: 2.0rem;          /* Bigger and bolder */
+  font-weight: 500;           /* Extra bold */
+  text-align: center;
+  color: #0e0300;             /* Orange color to match the theme */
+  margin-bottom: 30px;
+  text-transform: uppercase;   /* All caps for emphasis */
+  letter-spacing: 2px;         /* Adds spacing between letters */
+  margin-top: -10px;  
+  /* Stylish Shadow */
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3); 
+  border-bottom: 4px solid #FF7B00; /* Stylish underline */
+  padding-bottom: 10px;  
+}
+
+
+/* Make it responsive */
 @media (max-width: 768px) {
   .filters {
-    flex-direction: column;  
-    gap: 12px;
+    flex-direction: column;  /* Stack filters vertically on smaller screens */
+    gap: 10px;
   }
 
   .filters input,
   .filters select {
-    width: 100%;            
+    width: 100%;            /* Full width on smaller screens */
   }
 }
 

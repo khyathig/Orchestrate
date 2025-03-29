@@ -40,7 +40,7 @@ const DashboardAssignee = () => {
 
   return (
     <div className="dashboard">
-      <h1>Your Assigned Tasks</h1>
+      <h1>YOUR ASSIGNED TASK</h1>
 
       {/* Filters Section */}
       <div className="filters">

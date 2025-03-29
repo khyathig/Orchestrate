@@ -1,45 +1,109 @@
 .dashboard-container {
   display: flex;
   height: 100vh;
-  padding: 120px;
+  padding: 0;
 }
 
+/* Sidebar */
 .sidebar {
+  position: fixed;
+  left: 0;
+  top: 80px;
+  height: 100vh;
   width: 250px;
-  background-color: #333;
+  background-color: #212529;
   color: white;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
+  padding: 15px; /* Removed extra padding */
+  
+  /* ✅ Fix layering issue */
+  z-index: 1000; /* Ensure sidebar stays on top */
 }
 
 .sidebar button {
+  
   background: none;
   border: none;
-  color: white;
-  padding: 15px;
+  color:white;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.3s;
   text-align: left;
-}
-
-.sidebar button.active {
-  background-color: #007bff;
-}
-
-.main-content {
-  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
   padding: 20px;
 }
 
-.task-list, .event-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.sidebar button.active {
+  background-color: #13994d;
+  font-weight: bold;
+  color: #FFFFFF;
 }
 
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  margin-left: 250px; /* Prevents overlap with sidebar */
+  margin-top: 90px;
+  text-align: center;
+}
+
+/* Heading */
+.main-content h2 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-align: center;
+  color: #0e0300;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+  border-bottom: 4px solid #FF7B00;
+  padding-bottom: 10px;
+  width: 100%;
+  display: block;
+}
+
+/* Task & Event List */
+.task-list, .event-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Event Card */
 .event-card {
   background: #f8f9fa;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  max-width: 600px;
+  width: 100%;
 }
+
+.event-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+}
+
+.event-card button {
+  background: #FF7B00;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.event-card button:hover {
+  background: #E66100;
+}
+
