@@ -94,7 +94,7 @@
 }
 
 .event-card button {
-  background: #FF7B00;
+  background: #13994d;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -104,6 +104,6 @@
 }
 
 .event-card button:hover {
-  background: #E66100;
+  background: #13994d;
 }
 

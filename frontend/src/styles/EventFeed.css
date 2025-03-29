@@ -62,20 +62,25 @@
 }
 
 .filter-dropdown:hover {
-    background: #ff6200;
+    background: #1E90FF;
     color: #fff;
 }
 
 /* 🛠️ Section Titles */
 .section-title {
-    font-size: 40px;
-    font-weight: bold;
-    color:black ;
-    text-align: left;
-    margin-bottom: 1px;
-    text-transform: uppercase;
-    font-family: 'Roboto', sans-serif;
-    margin-left: 500px;
+    font-size: 2.5rem;           /* Bigger and bolder */
+    font-weight: 500;            /* Semi-bold */
+    text-align: center;          /* Centered */
+    color: #0e0300;              /* Dark color */
+    text-transform: uppercase;   /* All caps */
+    letter-spacing: 2px;         /* Spacing between letters */
+    margin-bottom: 30px;         /* Space below */
+    margin-top: -10px;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3); 
+
+    /* Stylish Underline */
+    border-bottom: 4px solid #FF7B00; 
+    padding-bottom: 10px;
 }
 
 /* 📅 Content Wrapper (Full width for upcoming and notifications) */
@@ -99,7 +104,7 @@
 /* 📅 Event Feed (Tasks) */
 .event-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Wider cards */
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* Wider cards */
     gap: 40px; /* Reduced gap for consistency */
     width: 100%;
 }
@@ -151,7 +156,7 @@
 .event-title {
     font-size: 22px;
     font-weight: bold;
-    color: #333;
+    color: rgb(9, 71, 133);
     margin: 0;
     flex: 1;
 }
