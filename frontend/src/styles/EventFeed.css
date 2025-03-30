@@ -2,6 +2,7 @@
 .event-feed-container {
     display: flex;
     flex-direction: column;
+    height: 100vh;
     gap: 20px;
     padding: 40px;
     background: #f5eeee;  

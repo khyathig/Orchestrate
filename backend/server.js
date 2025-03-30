@@ -13,6 +13,7 @@ const taskRoutes = require("./routes/taskRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/createdEventRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
+const chatRoutes = require("./routes/chat.js");
 
 const app = express();  //  Define app first
 const server = http.createServer(app);  //  Correct server initialization
@@ -43,12 +44,24 @@ io.on("connection", (socket) => {
 //  Middleware
 app.use(express.json());
 
+const allowedOrigins = [
+  "http://localhost:3000", 
+  "https://orchestrate-five.vercel.app"
+];
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL, // Allow frontend
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization", "user-email"],
     credentials: true
 }));
+
 app.use(bodyParser.json());
 
 //  MongoDB Connection
@@ -63,6 +76,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/chat", chatRoutes);
 
 // Start HTTP Server (Not app.listen())
 const PORT = process.env.PORT || 5000;

@@ -1,7 +1,7 @@
 {
   "name": "event-management",
   "version": "1.0.0",
-  "description": "Backend for Event Management System",
+  "description": "Backend for Event Management System with Chatbot Integration",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -15,7 +15,7 @@
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
-    "body-parser": "^1.20.3",
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "exceljs": "^4.3.0",

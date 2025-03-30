@@ -14,6 +14,7 @@ import TaskDetailsAssignee from "./components/Assignee Tasks/TaskDetails_Assigne
 import { TaskProvider } from "./components/Assignee Tasks/TaskContext_Assignee";
 import { TaskContextProvider } from "./components/Event Creator Tasks/TaskContext";
 import { EventProvider } from "./components/Event Creator Tasks/EventContext";
+import Chat from "./components/chatbot/Chat";
 import "./styles/App.css";
 
 function App() {
@@ -38,68 +39,60 @@ function App() {
                 <TaskProvider>
                     <Router>
                         {loggedInUser && <Navbar handleLogout={handleLogout} userRole={loggedInUser?.role} />}
-                        <Routes>
-                            {/* Authentication */}
-                            <Route 
-                                path="/" 
-                                element={loggedInUser ? <Navigate to="/feed" replace /> : <Login setLoggedInUser={setLoggedInUser} />}
-                            />
+                        
+                        <div className="app-container">
+                            {/* Routes Section */}
+                            <Routes>
+                                <Route 
+                                    path="/" 
+                                    element={loggedInUser ? <Navigate to="/feed" replace /> : <Login setLoggedInUser={setLoggedInUser} />}
+                                />
+                                <Route 
+                                    path="/feed" 
+                                    element={loggedInUser ? (
+                                        <>
+                                            <EventFeed loggedInUser={loggedInUser} />
+                                            <RazorpayButton amount={100} />
+                                        </>
+                                    ) : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="/create-event" 
+                                    element={loggedInUser ? <EventForm /> : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="/reports/*" 
+                                    element={loggedInUser ? <ReportsPage /> : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="/manage-events" 
+                                    element={loggedInUser ? <Dashboard /> : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="/admin/:id" 
+                                    element={loggedInUser ? <TaskDetails /> : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="/event/:eventID/tasks" 
+                                    element={loggedInUser ? <EventTasksPage /> : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="/pending-tasks" 
+                                    element={loggedInUser ? <DashboardAssignee /> : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="/tasks/:id" 
+                                    element={loggedInUser ? <TaskDetailsAssignee /> : <Navigate to="/" replace />}
+                                />
+                                <Route 
+                                    path="*" 
+                                    element={<Navigate to={loggedInUser ? "/feed" : "/"} replace />}
+                                />
+                            </Routes>
 
-                            {/* Event Feed */}
-                            <Route 
-                                path="/feed" 
-                                element={loggedInUser ? (
-                                    <>
-                                        <EventFeed loggedInUser={loggedInUser} />
-                                        <RazorpayButton amount={100} />
-                                    </>
-                                ) : <Navigate to="/" replace />}
-                            />
-
-                            {/* Create Event */}
-                            <Route 
-                                path="/create-event" 
-                                element={loggedInUser ? <EventForm /> : <Navigate to="/" replace />}
-                            />
-
-                            {/* Reports Section */}
-                            <Route 
-                                path="/reports/*" 
-                                element={loggedInUser ? <ReportsPage /> : <Navigate to="/" replace />}
-                            />
-
-                           {/* Event Creator's Dashboard */}
-                           <Route 
-                                path="/manage-events" 
-                                element={loggedInUser ? <Dashboard /> : <Navigate to="/" replace />}
-                            />
-                            <Route 
-                                path="/admin/:id" 
-                                element={loggedInUser ? <TaskDetails /> : <Navigate to="/" replace />}
-                            />
-                            {/* ✅ New Route for Viewing Event-Specific Tasks */}
-                            <Route 
-                                path="/event/:eventID/tasks" 
-                                element={loggedInUser ? <EventTasksPage /> : <Navigate to="/" replace />}
-                            />
-
-
-                            {/* Task Assignee Dashboard */}
-                            <Route 
-                                path="/pending-tasks" 
-                                element={loggedInUser ? <DashboardAssignee /> : <Navigate to="/" replace />}
-                            />
-                            <Route 
-                                path="/tasks/:id" 
-                                element={loggedInUser ? <TaskDetailsAssignee /> : <Navigate to="/" replace />}
-                            />
-
-                            {/* Catch-All Redirect */}
-                            <Route 
-                                path="*" 
-                                element={<Navigate to={loggedInUser ? "/feed" : "/"} replace />}
-                            />
-                        </Routes>
+                            {/* Floating Chatbot - Always on Top */}
+                            {loggedInUser && <Chat />}
+                        </div>
                     </Router>
                 </TaskProvider>
             </TaskContextProvider>
