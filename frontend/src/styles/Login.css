@@ -9,9 +9,9 @@
 }
 
 /* Orchestrate Text Styling */
-.app-title{
-  color: #ffffff;  /* Coral red */
-  font-size: 3rem; 
+.app-title {
+  color: #ffffff; /* White */
+  font-size: 3rem;
   font-weight: bold;
   text-align: center;
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -19,9 +19,8 @@
 }
 
 .app-title:hover {
-  color: #F06840;  /* Slight orange hue on hover */
+  color: #111d28; /* Dark navy on hover */
 }
-
 
 html, body {
   width: 100%;
@@ -45,7 +44,7 @@ html, body {
 *************************************************/
 .login-graphic {
   flex: 1;
-  background: linear-gradient(135deg, #FF5353, #F06840); /* Coral red to orange gradient */
+  background: linear-gradient(135deg, #111d28, #1b2a38); /* Dark navy gradient */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +120,7 @@ html, body {
 
 .login-card h2 {
   font-size: 2.5rem;
-  color: #232425; /* Coral red */
+  color: #232425; /* Deep black */
   text-align: center;
   margin-bottom: 20px;
 }
@@ -158,8 +157,8 @@ form input {
 }
 
 form input:focus {
-  border-color: #FF5353; /* Coral red */
-  box-shadow: 0 0 0 3px rgba(255, 83, 83, 0.2);
+  border-color: #111d28; /* Dark navy */
+  box-shadow: 0 0 0 3px rgba(17, 29, 40, 0.2);
   outline: none;
   transform: scale(1.02);
 }
@@ -168,7 +167,7 @@ form input:focus {
   7. LOGIN BUTTON
 *************************************************/
 .login-btn {
-  background: linear-gradient(135deg, #FF5353, #F06840); /* Coral to orange */
+  background: linear-gradient(135deg, #111d28, #1b2a38); /* Dark navy gradient */
   color: #fff;
   font-size: 1.1rem;
   padding: 16px;
@@ -184,16 +183,16 @@ form input:focus {
 }
 
 .login-btn:hover {
-  background: linear-gradient(135deg, #F06840, #FF5353);
+  background: linear-gradient(135deg, #1b2a38, #111d28);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 83, 83, 0.3);
+  box-shadow: 0 4px 12px rgba(17, 29, 40, 0.3);
 }
 
 /************************************************
   8. ERROR MESSAGE
 *************************************************/
 .error-message {
-  color: #FF5353; /* Coral red */
+  color: #FF5353; /* Coral red remains */
   font-size: 0.9rem;
   text-align: center;
   margin-top: 10px;

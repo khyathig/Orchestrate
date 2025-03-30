@@ -1,31 +1,178 @@
+/* Main container */
 .task-details {
-  overflow: visible;
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 120px;
-  background: #eef1f5;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
 
-.task-details h1,
-.task-details p {
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-  word-break: break-word;
-}
-
-.task-details h1 {
-  font-size: 30px;
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 60px; 
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.8;
   color: #333;
-  margin-bottom: 10px;
+  transition: all 0.3s ease;
 }
 
+/* Title styling */
+.task-details h1 {
+  font-size: 36px;
+  color: #000307; /* Dark color */
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: color 0.3s, transform 0.3s;
+  
+  /* 🎯 Stylish underline */
+  border-bottom: 4px solid #000408; 
+  padding-bottom: 8px;
+
+  /* 🌟 Text shadow for a subtle 3D effect */
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+
+  /* 🌠 Slight glow effect on hover */
+  transition: all 0.3s ease-in-out;
+}
+
+.task-details h1:hover {
+  color: #0056b3; /* Darker blue on hover */
+  border-bottom: 4px solid #0056b3;
+  text-shadow: 4px 6px 12px rgba(0, 91, 187, 0.4); /* More prominent shadow */
+  transform: translateY(-4px); /* Slight lift effect */
+}
+
+
+
+
+/* Labels and values */
 .task-details p {
   font-size: 18px;
-  color: #555;
+  margin: 12px 0;
+  color: #444; 
   line-height: 1.6;
+}
+
+.task-details strong {
+  color: #555;
+  font-weight: bold;
+}
+
+/* Comments section */
+.comments-section {
+  margin-top: 40px;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for comments section */
+.comments-section:hover {
+  transform: translateY(-5px);
+}
+
+/* Comments styling */
+.comments-section h3 {
+  font-size: 28px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.comment {
+  background: #f1f1f1;
+  padding: 15px;
+  border-left: 5px solid #007bff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.comment:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.comment p {
+  margin: 0;
+  color: #333;
+}
+
+.comment small {
+  display: block;
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* Textarea for adding comments */
+textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  resize: none;
+  transition: all 0.3s;
+}
+
+textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+/* Buttons */
+button {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #007bff;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.2);
+  margin-right: 15px;
+}
+
+button:hover {
+  background: #0056b3;
+  transform: translateY(-4px);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Back button styling */
+.task-details button:last-child {
+  background: #28a745; /* Green */
+  color: white;
+}
+
+.task-details button:last-child:hover {
+  background: #218838;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .task-details {
+    padding: 30px;
+  }
+
+  .comments-section {
+    padding: 20px;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    min-height: 80px;
+  }
 }

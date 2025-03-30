@@ -36,6 +36,7 @@ textarea {
 
 /* Headings - Modern Look */
 h2, h3 {
+    top: 200px;
     text-align: center;
     color: #252525;
     margin-bottom: 20px;
@@ -44,7 +45,7 @@ h2, h3 {
 
 /* Center the Form Container */
 .form-container {
-    
+    top :80px;
     max-width: 800px;
     margin: 40px auto;
     padding: 80px;

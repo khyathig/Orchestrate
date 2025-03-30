@@ -1,4 +1,5 @@
 .task-card {
+  
   width: 100%; /* Make it responsive */
   max-width: 480px; /* Increase width */
   min-height: 180px; /* Increase height */
@@ -23,7 +24,7 @@
 /* Title Styling */
 .task-card h3 {
   font-size: 20px;
-  color: #FF7B00; /* Orange Title */
+  color: black; 
   margin-bottom: 10px;
   font-weight: 600;
   word-wrap: break-word;
@@ -39,7 +40,7 @@
 
 /* Buttons inside Task Card */
 .task-card button {
-  background-color: #FF7B00; /* Orange Button */
+  background-color: #13994d; /* Orange Button */
   color: white;
   border: none;
   padding: 8px 16px;
@@ -53,6 +54,6 @@
 }
 
 .task-card button:hover {
-  background-color: #D16300; /* Darker Orange on hover */
+  background-color: #13994d; /* Darker Orange on hover */
   transform: scale(1.05);
 }
