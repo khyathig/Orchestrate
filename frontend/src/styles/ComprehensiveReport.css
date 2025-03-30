@@ -1,177 +1,177 @@
 .report-container {
-    padding: 20px;
-    max-width: 900px;
-    margin: auto;
-  }
-
-  .form-section {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .form-section input,
-  .form-section select {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .form-section button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 4px;
-  }
- 
-  .form-section button:hover {
-    background-color: #0056b3;
-  }
-
-  .error-message {
-    color: red;
-    margin-top: 10px;
-  }
-
-  .report-section {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-
-  .report-table-container {
-    overflow-x: auto;
-  }
-  
-  .report-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .report-table th,
-  .report-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .report-table th {
-    background-color: #007bff;
-    color: white;
-  }
-
-  .download-buttons {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .download-buttons button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-
-  .download-buttons button:hover {
-    background-color: #218838;
-  }
-
-  .charts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .chart-container {
-    width: 80%;
-    max-width: 1000px;
-    margin: 20px auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .chart-wrapper {
-    width: 100%;
-    max-width: 500px;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .chart-container canvas {
-    max-width: 100%;
-    height: auto !important;
-  }
-
-  .chart-container text {
-    transform: rotate(0deg) !important;
-  }
-
-  .download-btn {
-    background-color: #17a2b8;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-
-  .download-btn:hover {
-    background-color: #138496;
-  }
-
-  .event-container {
-    display: flex;
-    flex-direction: column; /* Stack charts vertically */
-    align-items: center; /* Center content */
-    gap: 20px;
-    width: 100%;
-    max-width: 1000px; /* Prevent overflow */
-    margin: auto;
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
 }
 
-.event-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 600px; /* Restrict width to avoid overflow */
+.form-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section input,
+.form-section select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-section button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.form-section button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.report-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.report-table-container {
+  overflow-x: auto;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.report-table th,
+.report-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.report-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.download-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.download-buttons button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.download-buttons button:hover {
+  background-color: #218838;
+}
+
+.charts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.chart-container {
+  width: 80%;
+  max-width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .chart-wrapper {
-    width: 100%;
-    max-width: 600px; /* Adjusted to prevent overflow */
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.chart-container text {
+  transform: rotate(0deg) !important;
+}
+
+.download-btn {
+  background-color: #17a2b8;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.download-btn:hover {
+  background-color: #138496;
+}
+
+.event-container {
+  display: flex;
+  flex-direction: column; /* Stack charts vertically */
+  align-items: center; /* Center content */
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px; /* Prevent overflow */
+  margin: auto;
+}
+
+.event-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 600px; /* Restrict width to avoid overflow */
+}
+
+.chart-wrapper {
+  width: 100%;
+  max-width: 600px; /* Adjusted to prevent overflow */
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 
-  .event-details p {
-    margin: 5px 0;
-  }
+.event-details p {
+  margin: 5px 0;
+}
