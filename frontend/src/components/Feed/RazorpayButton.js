@@ -6,7 +6,7 @@ import "../../styles/EventFeed.css";
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const RazorpayButton = ({ event, loggedInUser }) => {
-    const [isRSVPd, setIsRSVPd] = useState(false);
+    const [isRSVPd, setIsRSVPd] = useState(false);// State to track if the user has RSVP'd
 
     // Check if the user has already RSVP'd
     useEffect(() => {
@@ -14,43 +14,46 @@ const RazorpayButton = ({ event, loggedInUser }) => {
 
         const isUserAttendee = event.attendees.some(
             (attendee) =>
-                attendee.toLowerCase() === loggedInUser?.email.toLowerCase() || 
-                attendee.toLowerCase() === loggedInUser?.name.toLowerCase()
+                attendee.toLowerCase() === loggedInUser?.email.toLowerCase() || // Match by email
+                attendee.toLowerCase() === loggedInUser?.name.toLowerCase()// Match by name
         );
 
-        setIsRSVPd(isUserAttendee);
+        setIsRSVPd(isUserAttendee);// Update RSVP status
     }, [event, loggedInUser]);
 
     if (!event) {
         return null;
     }
-
+// Handle the payment process
     const handlePayment = async () => {
         try {
+             // Create order by making a POST request to the backend
             const response = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: event.ticketPrice }),
+                body: JSON.stringify({ amount: event.ticketPrice }), // Send the ticket price
             });
 
-            const order = await response.json();
+            const order = await response.json();// Parse the order details
 
             const options = {
-                key: "rzp_test_fTYhwgXS3lhJzR",
+                key: "rzp_test_fTYhwgXS3lhJzR",// Razorpay test key
                 amount: order.amount,
                 currency: "INR",
                 name: "Orchestrate",
-                description: event.eventName,
-                order_id: order.id,
+                description: event.eventName, // Event name as description
+                order_id: order.id,// order ID from the backend
                 handler: async function (response) {
                     console.log("Payment Success Response:", response);
 
                     try {
+                        
+                        // Send payment confirmation to the backend
                         const res = await axios.post(
                             `${API_BASE_URL}/api/payment/confirm-payment`,
                             {
-                                eventId: event._id,
-                                employeeEmail: loggedInUser?.email,
+                                eventId: event._id,// Event ID
+                                employeeEmail: loggedInUser?.email,// User's email
                                 razorpay_payment_id: response.razorpay_payment_id,
                                 razorpay_order_id: response.razorpay_order_id,
                                 razorpay_signature: response.razorpay_signature
@@ -59,7 +62,7 @@ const RazorpayButton = ({ event, loggedInUser }) => {
                                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
                             }
                         );
-
+                    // If payment is successful, show success message
                         if (res.status === 200) {
                             alert("Payment successful! RSVP confirmed.");
                             setIsRSVPd(true);

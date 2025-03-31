@@ -1,49 +1,49 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { updateTaskStatus } from './api';
-import { TaskContext } from './TaskContext_Assignee';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';// Import hooks for state management and lifecycle
+import { useLocation, useNavigate } from 'react-router-dom'; // Import navigation hooks
+import { updateTaskStatus } from './api';// Import API function to update task status
+import { TaskContext } from './TaskContext_Assignee';// Import TaskContext for global state management
+import axios from 'axios';// Import axios for API requests
 //import '../../styles/TaskDetails_Assignee.css';
 
 // Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const TaskDetails = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { fetchTasks } = useContext(TaskContext);
+  const location = useLocation(); // Get the current location data
+  const navigate = useNavigate(); // Hook for programmatic navigation
+  const { fetchTasks } = useContext(TaskContext); // Fetch task function from context
   const { task } = location.state || {}; // Ensure task exists
 
-  const [status, setStatus] = useState(task?.status || "Pending");
-  const [assigneeDetails, setAssigneeDetails] = useState(null);
-  const [comments, setComments] = useState(task?.comments || []);
-  const [newComment, setNewComment] = useState('');
+  const [status, setStatus] = useState(task?.status || "Pending");// State for task status
+  const [assigneeDetails, setAssigneeDetails] = useState(null);// State to hold assignee details
+  const [comments, setComments] = useState(task?.comments || []);// State to hold comments
+  const [newComment, setNewComment] = useState(''); // State for new comment input
 
   useEffect(() => {
-    if (!task?.assignee) return;
+    if (!task?.assignee) return; // Exit if no assignee exists
 
-    const fetchAssigneeDetails = async () => {
+    const fetchAssigneeDetails = async () => {// Function to fetch assignee details
       try {
         const response = await axios.get(`${API_BASE_URL}/api/employees/${task.assignee}`);
-        setAssigneeDetails(response.data);
+        setAssigneeDetails(response.data);// Set the fetched assignee details
         console.log("Assignee task details", response.data)
       } catch (error) {
         console.error("Error fetching assignee details:", error);
       }
     };
 
-    fetchAssigneeDetails();
-  }, [task?.assignee]);
+    fetchAssigneeDetails();// Fetch assignee details on component mount
+  }, [task?.assignee]);  // Dependency array with task assignee
 
   //  Fix: Ensure status updates & UI refresh properly
   const handleStatusChange = async (newStatus) => {
-    if (!task?._id || newStatus === status) return;
+    if (!task?._id || newStatus === status) return;  // Exit if no task ID or status unchanged
 
     try {
-      const response = await updateTaskStatus(task._id, newStatus);
+      const response = await updateTaskStatus(task._id, newStatus);// Call API to update task status
       if (response) {
-        alert("Task status updated successfully!");
-        setStatus(newStatus);
+        alert("Task status updated successfully!");  // Show success alert
+        setStatus(newStatus); // Update status in local state
         await fetchTasks(); //  Ensure the task list updates
       }
     } catch (error) {
@@ -59,15 +59,15 @@ const TaskDetails = () => {
 
   //  Fix: Handle adding comments properly
   const handleAddComment = async () => {
-    if (!newComment.trim()) {
+    if (!newComment.trim()) {// Validate non-empty comment
       console.warn('Comment is empty. Please add a message before submitting.');
       return;
     }
 
     try {
-      const userEmail = localStorage.getItem('userEmail');
+      const userEmail = localStorage.getItem('userEmail');  // Get user email from localStorage
       if (!userEmail) {
-        console.error('User email not found in localStorage');
+        console.error('User email not found in localStorage');// Validate user email
         return;
       }
 
@@ -95,10 +95,10 @@ const TaskDetails = () => {
 
   return (
     <div className="task-details">
-      <h1>{task.taskName}</h1>
-      <p><strong>Event:</strong> {task.eventName}</p>
-      <p><strong>Description:</strong> {task.description}</p>
-      <p><strong>Budget:</strong> {task.budget !== null ? `₹${task.budget}` : 'N/A'}</p>
+      <h1>{task.taskName}</h1> {/* Display task name */}
+      <p><strong>Event:</strong> {task.eventName}</p> {/* Display event name */}
+      <p><strong>Description:</strong> {task.description}</p> {/* Display description */}
+      <p><strong>Budget:</strong> {task.budget !== null ? `₹${task.budget}` : 'N/A'}</p>  {/* Display budget or N/A */}
       <p>
         <strong>Assigned To:</strong> {assigneeDetails ? `${assigneeDetails.name} (${assigneeDetails.email})` : task.assignee}
       </p>

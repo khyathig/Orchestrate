@@ -11,4 +11,5 @@ Run the following commands to import the collections:
 ```powershell
 mongoimport --uri="your mongodb string" --collection=events --file=events.json --jsonArray
 mongoimport --uri="your mongodb string" --collection=employee --file=employees.json --jsonArray
+mongoimport --uri="your mongodb string" --collection=tasks --file=tasks.json --jsonArray
 

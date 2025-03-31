@@ -1,22 +1,25 @@
+// TaskDetails.js
+
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TaskContext } from "./TaskContext";
-import axios from "axios";
-import "../../styles/TaskDetails.css";
+import { TaskContext } from "./TaskContext";                  // ✅ Import TaskContext
+import axios from "axios";                                    // ✅ Axios for HTTP requests
+import "../../styles/TaskDetails.css";                        // ✅ Import CSS styles
 
-// Use API URL from environment variables
+// ✅ Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const TaskDetails = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { fetchTasks } = useContext(TaskContext);
-  const { task } = location.state || {};
+  const location = useLocation();                            // ✅ Get current route location
+  const navigate = useNavigate();                            // ✅ Navigate between pages
+  const { fetchTasks } = useContext(TaskContext);            // ✅ Fetch tasks from context
+  const { task } = location.state || {};                     // ✅ Get task data from route state
 
-  const [assigneeDetails, setAssigneeDetails] = useState(null);
-  const [comments, setComments] = useState(task?.comments || []);
-  const [newComment, setNewComment] = useState("");
+  const [assigneeDetails, setAssigneeDetails] = useState(null); // ✅ Store assignee info
+  const [comments, setComments] = useState(task?.comments || []); // ✅ Store task comments
+  const [newComment, setNewComment] = useState("");          // ✅ New comment input state
 
+  // ✅ Initial task validation on mount
   useEffect(() => {
     if (!task?._id) {
       console.error("⚠ Task data not received correctly.");
@@ -25,67 +28,67 @@ const TaskDetails = () => {
     }
   }, [task]);
 
-  // Fetch assignee details
+  // ✅ Fetch assignee details
   useEffect(() => {
-    if (!task?.assignee) return;
+    if (!task?.assignee) return;                            // ✅ Skip if no assignee ID
 
     const fetchAssigneeDetails = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/api/employees/${task.assignee}`);
-        setAssigneeDetails(response.data);
+        setAssigneeDetails(response.data);                   // ✅ Set fetched assignee details
       } catch (error) {
         console.error("❌ Error fetching assignee details:", error);
       }
     };
 
     fetchAssigneeDetails();
-  }, [task?.assignee]);
+  }, [task?.assignee]);                                      // ✅ Re-fetch on assignee ID change
 
-  // Fetch latest comments every 5 seconds (Polling)
+  // ✅ Polling: Fetch latest comments every 5 seconds
   useEffect(() => {
     if (!task?._id) return;
 
     const fetchComments = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/api/admin/${task._id}/comments`);
-        setComments(response.data.comments || []);
+        setComments(response.data.comments || []);            // Update comments
       } catch (error) {
         console.error("❌ Error fetching comments:", error);
       }
     };
 
     fetchComments();
-    const interval = setInterval(fetchComments, 5000); // Fetch comments every 5s
+    const interval = setInterval(fetchComments, 5000);        //  Poll every 5 seconds
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);                     //  Cleanup interval on unmount
   }, [task?._id]);
 
-  // Handle adding a new comment
+  // ✅ Handle adding a new comment
   const handleAddComment = async () => {
-    if (!newComment.trim()) {
+    if (!newComment.trim()) {                                //  Ensure comment isn't empty
       console.warn("⚠ Comment is empty. Please add a message before submitting.");
       return;
     }
   
     try {
-      const userEmail = localStorage.getItem("userEmail"); // Get logged-in user email
+      const userEmail = localStorage.getItem("userEmail");    //  Get user email from localStorage
       if (!userEmail) {
         console.error("❌ User email not found in localStorage");
         return;
       }
   
       const response = await axios.post(
-        `${API_BASE_URL}/api/admin/${task._id}/comments`, // Corrected endpoint
+        `${API_BASE_URL}/api/admin/${task._id}/comments`,     //  API endpoint to add comments
         { 
-          email: userEmail,  // Logged-in user's email
-          author: task.creator, // Task creator as the author
-          message: newComment 
+          email: userEmail,                                   //  Include user email
+          author: task.creator,                               //  Set task creator as author
+          message: newComment                                 //  New comment content
         }
       );
   
-      if (response.data.task?.comments?.length) {
-        setComments(response.data.task.comments); // Set all comments instead of appending manually
-        setNewComment("");
+      if (response.data.task?.comments?.length) {             //  Update comments with response
+        setComments(response.data.task.comments);             
+        setNewComment("");                                    //  Clear input field
       } else {
         console.warn("⚠ No comments found in response.");
       }
@@ -93,18 +96,18 @@ const TaskDetails = () => {
       console.error("❌ Error adding comment:", error);
     }
   };
-  
 
-  // Navigate back and refresh tasks
+  // ✅ Navigate back and refresh tasks
   const handleBackToDashboard = async () => {
-    if (fetchTasks) await fetchTasks();
-    if (task?.eventID) {
-      navigate(`/manage-events`);
+    if (fetchTasks) await fetchTasks();                      // Refresh task list
+    if (task?.eventID) {                                     
+      navigate(`/manage-events`);                            //  Navigate to event management
     } else {
-      navigate(-1);
+      navigate(-1);                                          //  Go back one page
     }
   };
 
+  // ✅ Handle missing task
   if (!task || !task._id) {
     return (
       <div className="task-details">
@@ -120,22 +123,31 @@ const TaskDetails = () => {
       <p><strong>Description:</strong> {task.description}</p>
       <p><strong>Budget:</strong> {task.budget !== null ? `₹${task.budget}` : "N/A"}</p>
       <p><strong>Event ID:</strong> {task.eventID}</p>
-      <p><strong>Assigned To:</strong> {assigneeDetails ? `${assigneeDetails.name} (${assigneeDetails.email})` : task.assignee}</p>
+      <p>
+        <strong>Assigned To:</strong> 
+        {assigneeDetails ? `${assigneeDetails.name} (${assigneeDetails.email})` : task.assignee}
+      </p>
       <p><strong>Assigned By:</strong> {task.creator}</p>
 
+      {/* ✅ Comments section */}
       <div className="comments-section">
         <h3>Comments</h3>
         {comments.length > 0 ? (
           comments.map((comment, index) => (
             <div key={index} className="comment">
               <p>{comment.message}</p>
-              <small>By {comment.author} at {comment.timestamp ? new Date(comment.timestamp).toLocaleString() : "Unknown Time"}</small>
+              <small>
+                By {comment.author} at {comment.timestamp 
+                  ? new Date(comment.timestamp).toLocaleString() 
+                  : "Unknown Time"}
+              </small>
             </div>
           ))
         ) : (
           <p>No comments yet.</p>
         )}
 
+        {/* ✅ Add new comment */}
         <textarea
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
