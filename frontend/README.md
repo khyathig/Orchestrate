@@ -27,7 +27,7 @@ npm install
 # Run the frontend
 npm run start
 
----
+```
 
 ## **Payment Details for Testing**  
 
