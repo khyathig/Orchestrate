@@ -1,19 +1,40 @@
 // taskService.js
-
+/**
+ * @file taskService.js
+ * @description Service functions to fetch tasks from the backend API.
+ */
 import axios from 'axios';
-
+/**
+ * Base API URL from environment variables.
+ * @constant {string}
+ */
 // ✅ Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-// ✅ Define base API endpoint
-const API_URL = `${API_BASE_URL}/api/admin`;
+/**
+ * Admin API endpoint.
+ * @constant {string}
+ */
 
+const API_URL = `${API_BASE_URL}/api/admin`;
+/**
+ * Logs labeled data for debugging purposes.
+ * @param {string} label - Description of the logged data.
+ * @param {*} data - Data to log.
+ */
 // ✅ Enhanced logging function for easier debugging
 const logData = (label, data) => {
   console.log(`✅ ${label}:`, data);
 };
 
 // ✅ Fetch all tasks
+/**
+ * Fetches all tasks from the backend API.
+ * @async
+ * @function
+ * @throws {Error} If authentication token or user email is missing.
+ * @returns {Promise<Object[]>} A promise that resolves to an array of tasks.
+ */
 export const fetchTasks = async () => {
   const token = localStorage.getItem('token');              //  Retrieve auth token
   const userEmail = localStorage.getItem('userEmail');      //  Retrieve logged-in user email
@@ -43,8 +64,15 @@ export const fetchTasks = async () => {
     throw error;                                             //  Throw error if fetching fails
   }
 };
+/**
+ * Fetches a specific task by its ID.
+ * @async
+ * @function
+ * @param {string} id - The ID of the task to fetch.
+ * @throws {Error} If authentication token or user email is missing.
+ * @returns {Promise<Object>} A promise that resolves to the fetched task object.
+ */
 
-// ✅ Fetch a task by ID
 export const fetchTaskById = async (id) => {
   const token = localStorage.getItem('token');               // Retrieve auth token
   const userEmail = localStorage.getItem('userEmail');       // Retrieve logged-in user email

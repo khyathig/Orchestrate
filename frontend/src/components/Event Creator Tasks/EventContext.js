@@ -1,4 +1,18 @@
 // EventContext.js
+/**
+ * EventContext.js
+ *
+ * This module provides the `EventContext` React Context for managing event-related data
+ * in the application. It includes functions to fetch events created by an admin and
+ * retrieve tasks associated with a specific event.
+ *
+ * Dependencies:
+ * - React (useContext, useState, useEffect, useCallback)
+ * - Axios for API requests
+ *
+ * API Base URL is fetched from environment variables.
+ */
+
 
 import React, { createContext, useState, useEffect, useCallback } from "react";  // Import necessary hooks and React modules
 import axios from "axios";                                                       // Import axios for API requests

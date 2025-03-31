@@ -1,3 +1,17 @@
+/**
+ * Login Component
+ * This component renders a login form that allows users to authenticate using their email and password. 
+ * It handles form submission, interacts with the backend API for login, stores the user's token and data in 
+ * localStorage, and redirects to the feed page upon successful login. If already logged in, the user is redirected 
+ * to the feed page immediately.
+ * 
+ * @component
+ * 
+ * @example
+ * // Usage of Login component
+ * <Login setLoggedInUser={setLoggedInUser} />
+ */
+
 import React, { useState, useEffect } from "react";// Import React hooks for state and side effects
 import axios from "axios";// Import Axios for making HTTP requests
 import { useNavigate } from "react-router-dom";// Import navigation hook for routing
@@ -5,7 +19,14 @@ import "../styles/Login.css"; // Import CSS for styling
 
 // Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
+/**
+ * Handles user login and redirects upon successful authentication.
+ * 
+ * @function
+ * @param {Object} props - Component properties
+ * @param {function} props.setLoggedInUser - Function to set the logged-in user in the parent component state
+ * @returns {JSX.Element} - The rendered Login component
+ */
 const Login = ({ setLoggedInUser }) => {// Login component with prop to set the logged-in user
     const [email, setEmail] = useState("");// State for storing the email input
     const [password, setPassword] = useState("");// State for storing the password input
@@ -13,13 +34,29 @@ const Login = ({ setLoggedInUser }) => {// Login component with prop to set the 
     const navigate = useNavigate();// Hook to navigate between routes
 
     // Redirect if already logged in
+     /**
+     * Redirects to the feed page if the user is already logged in.
+     * This effect runs on initial component mount and checks for a valid token in localStorage.
+     * 
+     * @hook
+     * @returns {void}
+     */
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
             navigate("/feed");// Navigate to feed if token exists
         }
     }, [navigate]); // Dependency array to avoid unnecessary re-renders
-
+/**
+     * Handles the form submission for login.
+     * Sends the email and password to the backend API and processes the response.
+     * On successful login, stores the token and user data in localStorage and redirects the user.
+     * 
+     * @async
+     * @function
+     * @param {Object} e - The event object for the form submission
+     * @returns {void}
+     */
     const handleLogin = async (e) => {// Function to handle login form submission
         e.preventDefault();           // Prevent page reload on form submit
         setError("");                 // Clear previous errors

@@ -1,8 +1,36 @@
 // TaskCard.js
+/**
+ * TaskCard.js
+ *
+ * This component displays individual task details in a card format.
+ * Clicking on the card or the "View Details" button navigates to the task details page.
+ *
+ * Dependencies:
+ * - React
+ * - React Router (useNavigate)
+ */
 
 import React from 'react';                               // Import React library
 import { useNavigate } from 'react-router-dom';           // Import navigation hook for routing
 
+
+
+/**
+ * TaskCard Component
+ *
+ * Displays key details of a task and allows navigation to the task details page.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {Object} props.task - Task object containing details
+ * @param {string} props.task._id - Unique task identifier
+ * @param {string} [props.task.taskName] - Name of the task
+ * @param {string} [props.task.eventName] - Name of the associated event
+ * @param {string} [props.task.assignee] - Name of the assigned person
+ * @param {string} [props.task.status] - Current status of the task
+ * @param {string} [props.task.eventID] - ID of the associated event
+ * @returns {JSX.Element} The TaskCard component
+ */
 const TaskCard = ({ task }) => {                          // Component to display individual task details
   const navigate = useNavigate();                         // Hook for programmatic navigation
 

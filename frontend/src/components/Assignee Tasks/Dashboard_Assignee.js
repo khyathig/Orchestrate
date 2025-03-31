@@ -6,6 +6,13 @@ import TaskCard from './TaskCard_Assignee';                      // Import TaskC
 import socket from '../../utils/socket';                         // Import socket for real-time updates
 import '../../styles/Dashboard_Assignee.css';                     // Import CSS for styling
 
+
+/**
+ * Dashboard component for assignees to view and manage assigned tasks.
+ * Allows searching, filtering, and real-time task updates.
+ * @returns {JSX.Element} The rendered dashboard component.
+ */
+
 const DashboardAssignee = () => {
   const { tasks, fetchTasks } = useContext(TaskContext);         // Use TaskContext to access tasks and fetchTasks function
 

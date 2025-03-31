@@ -1,3 +1,15 @@
+/**
+ * ComprehensiveReport component is responsible for fetching and displaying an aggregated event report.
+ * It supports filtering the report by event name, team, year, and event type.
+ * The component allows users to view event data in tables and charts (Bar and Pie charts) and export the report to PDF and Excel formats.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <ComprehensiveReport />
+ * )
+ */
+
 import React, { useState, useRef, useEffect , useCallback} from 'react';
 import axios from 'axios';
 import { Bar, Pie } from 'react-chartjs-2';
@@ -42,6 +54,14 @@ const ComprehensiveReport = () => {
   const reportRef = useRef();
 
   //  Fetch Report Function
+  /**
+ * Handles fetching the aggregated event report from the server.
+ * Filters the report data by event name, team, year, and event type.
+ * Aggregates data by event year and type, calculates total budget and event count.
+ * 
+ * @param {boolean} isInitialLoad - Determines if the function is being called on the initial load.
+ * @throws {Error} If data format is invalid or year is not within a valid range.
+ */
   const fetchReport = useCallback(async (isInitialLoad = false) => {
     setLoading(true);
     setError('');
@@ -120,7 +140,10 @@ const ComprehensiveReport = () => {
     maintainAspectRatio: false,
     plugins: { legend: { position: 'bottom' } }
   };
-
+/**
+ * Initiates PDF download of the comprehensive report using html2canvas and jsPDF.
+ * The content is captured as an image and added to the PDF file.
+ */
   // PDF download
   const downloadPDF = () => {
   const reportElement = reportRef.current;
@@ -150,6 +173,10 @@ const ComprehensiveReport = () => {
   });
 };
   // Excel download
+  /**
+ * Initiates Excel file download of the comprehensive report using ExcelJS.
+ * Converts the report data into an Excel sheet and triggers a download.
+ */
   const downloadExcel = () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Comprehensive Report');
@@ -178,6 +205,10 @@ const ComprehensiveReport = () => {
 
   /* Prepare data for aggregated charts */
  // Event Count by Year
+ /**
+ * Prepares and filters event data for chart visualizations based on aggregated report data.
+ * Includes charts for events per year, total budget per year, event type distribution, and team-specific charts.
+ */
 const eventsPerYear = reportData.reduce((acc, cur) => {
   const yr = cur.year;
   acc[yr] = (acc[yr] || 0) + cur.eventCount;

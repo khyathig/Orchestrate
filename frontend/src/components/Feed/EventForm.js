@@ -1,3 +1,18 @@
+/**
+ * EventForm Component for creating events with dynamic task management.
+ * 
+ * This component allows users to create events, specify event details, and manage tasks related to the event.
+ * The form adjusts the available fields based on the user's role (e.g., manager vs non-manager).
+ * It handles task creation, input validation, and form submission to an API.
+ * 
+ * @component
+ * @example
+ * return <EventForm userRole="manager" />;
+ * 
+ * @param {Object} props - The component props.
+ * @param {string} props.userRole - The role of the user (e.g., 'manager' or 'employee').
+ */
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +38,10 @@ function EventForm({userRole}) {
   const [validationErrors, setValidationErrors] = useState({}); // Added state for validation errors
   const navigate = useNavigate();
 
+  /**
+   * Effect hook to set the initial event type based on user role
+   * If userRole is "manager", default eventType is "limited-entry", otherwise "firm-wide"
+   */
   // Ensure eventType is properly set based on userRole when the component mounts
   useEffect(() => {
     if (userRole === "manager") {
@@ -71,7 +90,11 @@ function EventForm({userRole}) {
     }
     return true;
   };
-
+/**
+   * Handles form submission. Sends the event data to the server and creates the event.
+   * If validation fails (e.g., task deadline), the form won't submit.
+   * @param {Object} e - The form submission event.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateDeadlines()) return;

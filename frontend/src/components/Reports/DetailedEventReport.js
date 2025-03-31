@@ -1,3 +1,16 @@
+/**
+ * DetailedEventReport component allows users to filter and generate detailed event reports
+ * based on event name, team, and year. It displays the report data in a structured format, 
+ * visualizes the event statistics using Pie and Bar charts, and enables downloading the report 
+ * in PDF and Excel formats.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <DetailedEventReport />
+ * )
+ */
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { Pie, Bar } from 'react-chartjs-2';
@@ -10,6 +23,13 @@ import '../../styles/ComprehensiveReport.css';
 
 ChartJS.register(ArcElement, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
+/**
+ * API base URL for fetching event report data.
+ * 
+ * @constant
+ * @type {string}
+ * @default
+ */
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const DetailedEventReport = () => {
@@ -21,7 +41,16 @@ const DetailedEventReport = () => {
   const [error, setError] = useState('');
   const reportRef = useRef();
 
-
+/**
+ * Handles the fetching of detailed event report based on applied filters (event name, team, year).
+ * Uses Axios to send a GET request to the server and retrieves the detailed report data.
+ * 
+ * @function
+ * @param {string} eventName - The name of the event to filter the report.
+ * @param {string} team - The team name to filter the report.
+ * @param {string} year - The year of the event to filter the report.
+ * @throws {Error} If the data fetching fails or no data matches the criteria.
+ */
   const fetchReport = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -47,13 +76,27 @@ const DetailedEventReport = () => {
   useEffect(() => {
     fetchReport();
   }, [fetchReport]);
-
+/**
+ * Initializes the chart options for Pie and Bar charts used in event report visualizations.
+ * 
+ * @constant
+ * @type {object}
+ * @default
+ * @property {boolean} responsive - Ensures the charts are responsive and maintain aspect ratio.
+ * @property {object} plugins - Includes chart legend configuration.
+ */
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: { legend: { position: 'top' } },
   };
 
+/**
+ * Downloads the detailed event report in PDF format.
+ * Captures the report content and converts it into a downloadable PDF using html2canvas and jsPDF.
+ * 
+ * @function
+ */
   const downloadPDF = () => {
     html2canvas(reportRef.current).then(canvas => {
       const imgData = canvas.toDataURL("image/png");
@@ -62,7 +105,12 @@ const DetailedEventReport = () => {
       pdf.save("Detailed_Event_Report.pdf");
     });
   };
-
+/**
+ * Downloads the detailed event report in Excel format.
+ * Converts the event data into an Excel sheet and triggers a download.
+ * 
+ * @function
+ */
   const downloadExcel = () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet("Detailed Report");
@@ -85,7 +133,17 @@ const DetailedEventReport = () => {
       saveAs(new Blob([buffer]), "Detailed_Event_Report.xlsx");
     });
   };
-
+/**
+ * Renders the detailed event report UI, allowing users to filter by event name, team, and year.
+ * Displays the report results, including event details and visualizations such as Pie and Bar charts.
+ * Provides options to download the report as a PDF or Excel file.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <DetailedEventReport />
+ * )
+ */
   return (
     <div>
       <div className="form-section">

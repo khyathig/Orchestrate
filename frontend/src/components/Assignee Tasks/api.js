@@ -3,7 +3,10 @@ import axios from 'axios';                                            // Import 
 
 // Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;              // Base URL for API requests
-
+/**
+ * Fetches assigned tasks for the logged-in user.
+ * @returns {Promise<Array>} A promise that resolves to an array of assigned tasks.
+ */
 export const fetchTasks = async () => {                               // Function to fetch assigned tasks
   try {
     const userEmail = localStorage.getItem("userEmail");             // Get user email from localStorage
@@ -25,6 +28,13 @@ export const fetchTasks = async () => {                               // Functio
     return [];                                                        // Return empty array on error
   }
 };
+
+/**
+ * Adds a comment to a specific task.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} message - The comment message.
+ * @returns {Promise<Object|null>} A promise that resolves to the response data or null on error.
+ */
 
 export const addCommentToTask = async (taskId, message) => {        // Function to add a comment to a task
   try {
