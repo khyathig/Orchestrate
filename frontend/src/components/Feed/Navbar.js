@@ -12,7 +12,7 @@ function Navbar({ handleLogout, userRole }) {
     };
 
     const handleNavigation = (path) => {
-        navigate(path);
+        navigate(path);// Navigate to the desired path
         
         // Close the menu immediately after selection
         setMenuOpen(false);

@@ -7,15 +7,17 @@ import "../../styles/EventForm.css";
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function EventForm({userRole}) {
-  const [eventName, setEventName] = useState("");
-  const [description, setDescription] = useState("");
-  const [venue, setVenue] = useState("");
-  const [date, setDate] = useState("");
-  const [eventType, setEventType] = useState();
-  const [availableSlots, setAvailableSlots] = useState("");
-  const [ticketPrice, setTicketPrice] = useState("");
-  const [team, setTeam] = useState("");
-  const [totalBudget, setTotalBudget] = useState("");
+  const [eventName, setEventName] = useState(""); //event name 
+  const [description, setDescription] = useState("");// event description
+  const [venue, setVenue] = useState("");// event venue
+  const [date, setDate] = useState("");// eventdate
+  const [eventType, setEventType] = useState();//event type
+  const [availableSlots, setAvailableSlots] = useState("");//available slots 
+  const [ticketPrice, setTicketPrice] = useState("");//ticket price
+  const [team, setTeam] = useState("");// team name 
+  const [totalBudget, setTotalBudget] = useState("");// event budget
+
+  //task array with initial empty task 
   const [tasks, setTasks] = useState([{ taskName: "", description: "", assignee: "", deadline: "", budget: "" }]);
   const [errors, setErrors] = useState({});
   const [validationErrors, setValidationErrors] = useState({}); // Added state for validation errors
