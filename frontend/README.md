@@ -26,3 +26,18 @@ npm install
 
 # Run the frontend
 npm run start
+
+---
+
+## **Payment Details for Testing**  
+
+| Payment Method   | Test Input                             | Status |
+|-----------------|--------------------------------------|---------|
+| **Card (Success)**  | 4111 1111 1111 1111                | ✅ Payment Successful |
+| **Card (Failure)**  | 4000 0000 0000 0002                | ❌ Payment Failed |
+| **UPI (Success)**   | success@razorpay                   | ✅ Payment Successful |
+| **UPI (Failure)**   | failure@razorpay                   | ❌ Payment Failed |
+| **Net Banking**     | "ICICI" / "HDFC"                    | ✅ / ❌ Based on selection |
+| **Wallet**         | "PhonePe", "Paytm"                  | ✅ Payment Successful |
+| **EMI**           | 5204 2424 2424 2424 (HDFC)          | ✅ EMI Successful |
+| **Invalid Input**  | 0000 0000 0000 0000                | ❌ Error |
