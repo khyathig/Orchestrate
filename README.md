@@ -1,15 +1,25 @@
-## Importing MongoDB Data Manually
-To import the provided JSON data into MongoDB, follow these steps:
+# 🎯 Orchestrate Event Management
 
-### Prerequisites
-- Ensure MongoDB is running locally.
-- Open PowerShell or any command line interface.
+**Orchestrate Event Management** is a full-stack web application designed to simplify event planning and coordination. It provides a seamless platform for organizers to create, manage, and monitor events while allowing attendees to explore and register for upcoming events.
 
-### Import Commands
-Run the following commands to import the collections:
+## ✨ **Key Features**
+- Event creation with customizable details (date, venue, description, etc.)
+- User authentication and role-based access (Admin/Organizer/Attendee)
+- Dashboard for event management and real-time updates
+- Ticket booking and payment integration
+- Notification and reminder system for registered users
 
-```powershell
-mongoimport --uri="your mongodb string" --collection=events --file=events.json --jsonArray
-mongoimport --uri="your mongodb string" --collection=employee --file=employees.json --jsonArray
-mongoimport --uri="your mongodb string" --collection=tasks --file=tasks.json --jsonArray
+## 🛠️ **Tech Stack**
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js with REST APIs
+- **Database:** MongoDB for secure data storage
+- **Authentication:** JWT-based user authentication
+- **Deployment:** Hosted frontend on Vercel and backend on Render
+
+## 🚀 **Getting Started**
+Follow the instructions in the respective frontend and backend directories to set up and run the project locally.
+
+## 🌐 **Live Demo**
+
+[Orchestrate Event Management - Live Website](https://orchestrate-five.vercel.app/)
 
