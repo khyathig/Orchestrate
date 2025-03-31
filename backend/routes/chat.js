@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
     try {
         const { message } = req.body;
 
-        const response = await axios.post("http://localhost:11434/api/generate", {
+        const response = await axios.post("http://localhost:11434/api/generate", {  // Change the port to 7000
             model: "my-chatbot",
             prompt: message,
             stream: false,

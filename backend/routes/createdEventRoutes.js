@@ -7,7 +7,9 @@ const {
     addCommentToTask,
     getEventsByCreator,
     getTasksByEventID, 
-    getTaskComments
+    getTaskComments,
+    getEventById,
+    updateEvent,
 } = require("../controllers/createdEventController");
 const router = express.Router();
 
@@ -18,7 +20,7 @@ router.get("/",getTasks);
 router.get("/filter", filterTasks);
 
 router.get("/created-events", getEventsByCreator);
-
+// Route to get task details based on eventID
 router.get("/tasks", getTasksByEventID);
 
 // Route to get task details by ID

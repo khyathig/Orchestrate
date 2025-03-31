@@ -21,14 +21,13 @@ const Chat = () => {
         setLoading(true);
 
         try {
-            const response = await fetch("http://localhost:11434/api/chat/generate", {
+            const response = await fetch("http://localhost:5000/api/chat", {  // Call the backend, not chatbot
+
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    model: "my-chatbot",
-                    prompt: input,
-                    stream: false,
-                }),
+                    message: input,  // <-- Correct key
+                }),                
             });
 
             if (!response.ok) throw new Error("Failed to fetch");

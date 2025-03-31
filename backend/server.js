@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { Server } = require("socket.io");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
 
 const eventRoutes = require("./routes/eventRoutes");
 const authRoutes = require("./routes/auth");
@@ -77,6 +79,7 @@ app.use("/api/events", eventRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/chat", chatRoutes);
+
 
 // Start HTTP Server (Not app.listen())
 const PORT = process.env.PORT || 5000;
