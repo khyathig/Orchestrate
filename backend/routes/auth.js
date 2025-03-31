@@ -5,11 +5,29 @@ const Employee = require("../models/Employee");
 
 const router = express.Router();
 
+/**
+ * JWT secret key for token generation.
+ * Uses environment variable if available; otherwise, falls back to a default.
+ * @constant {string}
+ */
+
 // Ensure JWT secret exists
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
 if (!process.env.JWT_SECRET) {
   console.error("Warning: JWT_SECRET is missing in environment variables!");
 }
+
+/**
+ * @route POST /login
+ * @description Authenticates an employee and returns a JWT token.
+ * @access Public
+ * @param {Object} req - Express request object.
+ * @param {Object} req.body - Request body containing email and password.
+ * @param {string} req.body.email - Employee's email.
+ * @param {string} req.body.password - Employee's password.
+ * @param {Object} res - Express response object.
+ * @returns {Object} JSON response containing the user details and authentication token.
+ */
 
 // User Login
 router.post("/login", async (req, res) => {
