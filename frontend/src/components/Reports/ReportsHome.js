@@ -1,3 +1,16 @@
+/**
+ * ReportsHome Component
+ * This component fetches and displays various event-related reports including event count per year, 
+ * total budget per year, budget allocation by event type, and budget allocation by team.
+ * It uses various charts (Bar, Pie) from the Recharts library for visualizing the data.
+ * 
+ * @component
+ * 
+ * @example
+ * // Usage of ReportsHome component
+ * <ReportsHome />
+ */
+
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
@@ -16,7 +29,12 @@ const ReportsHome = () => {
   const [eventTypeDistribution, setEventTypeDistribution] = useState([]);
   const [budgetByType, setBudgetByType] = useState([]);
   const [budgetByTeam, setBudgetByTeam] = useState([]);
-
+/**
+ * Fetches and processes the report data from the API.
+ * 
+ * @function
+ * @returns {void}
+ */
   const fetchReport = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -61,7 +79,13 @@ const ReportsHome = () => {
 
     setLoading(false);
   }, []);
-
+/**
+ * Processes and sets the chart data for events per year, budgets, and event distribution.
+ * This hook is triggered when the report data changes.
+ * 
+ * @hook
+ * @returns {void}
+ */
   useEffect(() => {
     fetchReport();
   }, [fetchReport]);
@@ -98,7 +122,13 @@ const ReportsHome = () => {
   console.log("Budget by Event Type:", budgetByEventType);
   console.log("Budget by Team:", budgetByTeams);
   }, [reportData]);
-
+/**
+ * Pie chart options for event type distribution and styling.
+ * This includes configuration for legend, tooltips, colors, and animation.
+ * 
+ * @constant
+ * @type {Object}
+ */
   const pieOptions = {
     responsive: true,
     maintainAspectRatio: false,

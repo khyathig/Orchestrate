@@ -1,4 +1,17 @@
 // Dashboard.js
+/**
+ * Dashboard Component
+ * 
+ * This component serves as the main dashboard displaying tasks assigned to the user
+ * and events created by the user. It includes task and event filtering, navigation,
+ * and dynamic content loading.
+ * 
+ * Features:
+ * - Task and event filtering based on search input
+ * - Task and event navigation
+ * - Sidebar for switching between tasks and events
+ * - Uses TaskContext and EventContext for global state management
+ */
 
 import React, { useState, useEffect, useContext } from "react";        // Import hooks for state management and lifecycle
 import { TaskContext } from "./TaskContext";                           // Import TaskContext for task data

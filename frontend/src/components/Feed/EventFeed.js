@@ -1,11 +1,26 @@
+/**
+ * @file EventFeed.js
+ * @description Component to display events, handle RSVP, filtering, and payments.
+ */
+
 import React, { useState, useEffect } from "react";
 import RazorpayButton from "./RazorpayButton";
 import "../../styles/EventFeed.css";
 import NotificationPanel from "./NotificationPanel";
 
-// Use API URL from environment variables
+/**
+ * Base API URL from environment variables.
+ * @constant {string}
+ */
+
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
+/**
+ * EventFeed Component
+ * @component
+ * @param {Object} props - Component props
+ * @param {Object} props.loggedInUser - Logged-in user data
+ */
 function EventFeed({ loggedInUser }) {
   const [events, setEvents] = useState([]);
   const [tasks, setTasks] = useState([]);

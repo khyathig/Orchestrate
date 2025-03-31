@@ -1,5 +1,18 @@
 // TaskDetails.js
-
+/**
+ * TaskDetails.js
+ *
+ * Displays detailed information about a specific task, including its event details,
+ * assigned personnel, and comments. Users can add comments and navigate back to the
+ * dashboard.
+ *
+ * Dependencies:
+ * - React (useState, useEffect, useContext)
+ * - react-router-dom (useLocation, useNavigate)
+ * - TaskContext (fetchTasks)
+ * - axios (HTTP requests)
+ * - TaskDetails.css (Styling)
+ */
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TaskContext } from "./TaskContext";                  // ✅ Import TaskContext
@@ -8,7 +21,15 @@ import "../../styles/TaskDetails.css";                        // ✅ Import CSS 
 
 // ✅ Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
+/**
+ * TaskDetails Component
+ *
+ * Fetches and displays details about a specific task.
+ * Allows users to view and add comments.
+ *
+ * @component
+ * @returns {JSX.Element} Task details UI
+ */
 const TaskDetails = () => {
   const location = useLocation();                            // ✅ Get current route location
   const navigate = useNavigate();                            // ✅ Navigate between pages
@@ -20,6 +41,7 @@ const TaskDetails = () => {
   const [newComment, setNewComment] = useState("");          // ✅ New comment input state
 
   // ✅ Initial task validation on mount
+  
   useEffect(() => {
     if (!task?._id) {
       console.error("⚠ Task data not received correctly.");
@@ -29,6 +51,9 @@ const TaskDetails = () => {
   }, [task]);
 
   // ✅ Fetch assignee details
+  /**
+   * Fetches assignee details from the API.
+   */
   useEffect(() => {
     if (!task?.assignee) return;                            // ✅ Skip if no assignee ID
 

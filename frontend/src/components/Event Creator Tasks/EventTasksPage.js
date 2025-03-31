@@ -1,10 +1,30 @@
 // EventTasksPage.js
+/**
+ * EventTasksPage.js
+ *
+ * This component displays all tasks associated with a specific event.
+ * Users can filter tasks by status and navigate back to the previous page.
+ *
+ * Dependencies:
+ * - React (useEffect, useState, useContext, useCallback)
+ * - React Router (useParams, useNavigate)
+ * - EventContext for fetching and displaying tasks
+ * - TaskCard component for rendering individual tasks
+ */
 
 import React, { useEffect, useState, useContext, useCallback } from "react";  // Import necessary hooks and modules
 import { useParams, useNavigate } from "react-router-dom";                    // Import route navigation functions
 import { EventContext } from "./EventContext";                                // Import EventContext for event data
-import TaskCard from "./TaskCard";                                            // Import TaskCard component to display individual tasks
-
+import TaskCard from "./TaskCard";  // Import TaskCard component to display individual tasks
+/**
+ * EventTasksPage Component
+ * 
+ * Fetches and displays tasks associated with a specific event.
+ * Provides filtering functionality and navigation back to the previous page.
+ * 
+ * @component
+ * @returns {JSX.Element} The EventTasksPage component
+ */
 const EventTasksPage = () => {
 
     // ✅ Extract event ID from URL params and initialize navigation

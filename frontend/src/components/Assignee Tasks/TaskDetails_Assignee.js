@@ -7,7 +7,10 @@ import axios from 'axios';// Import axios for API requests
 
 // Use API URL from environment variables
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
+/**
+ * Component to display task details and allow updates.
+ * Provides task status updates, comments, and assignee details.
+ */
 const TaskDetails = () => {
   const location = useLocation(); // Get the current location data
   const navigate = useNavigate(); // Hook for programmatic navigation
@@ -21,7 +24,9 @@ const TaskDetails = () => {
 
   useEffect(() => {
     if (!task?.assignee) return; // Exit if no assignee exists
-
+ /**
+     * Fetch assignee details from the API.
+     */
     const fetchAssigneeDetails = async () => {// Function to fetch assignee details
       try {
         const response = await axios.get(`${API_BASE_URL}/api/employees/${task.assignee}`);
@@ -34,6 +39,10 @@ const TaskDetails = () => {
 
     fetchAssigneeDetails();// Fetch assignee details on component mount
   }, [task?.assignee]);  // Dependency array with task assignee
+/**
+   * Handle task status change and update UI.
+   * @param {string} newStatus - The new status to set.
+   */
 
   //  Fix: Ensure status updates & UI refresh properly
   const handleStatusChange = async (newStatus) => {
@@ -50,13 +59,17 @@ const TaskDetails = () => {
       console.error("Error updating task status:", error);
     }
   };
-
+/**
+   * Refresh the task list and navigate back to the dashboard.
+   */
   //  Fix: Ensure dashboard reflects updates before navigating
   const handleBackToDashboard = async () => {
     await fetchTasks(); // Fetch latest tasks
     navigate('/pending-tasks'); // Navigate after fetching
   };
-
+/**
+   * Handle adding a new comment to the task.
+   */
   //  Fix: Handle adding comments properly
   const handleAddComment = async () => {
     if (!newComment.trim()) {// Validate non-empty comment
