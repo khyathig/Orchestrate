@@ -5,22 +5,33 @@ const Task = require("../models/Task");
 const Employee = require("../models/Employee");
 const { sendEmail } = require("../services/emailService");
 
-exports.createEvent = async (req, res) => {
+/**
+ * Controller to create a new event and assign tasks.
+ * This function creates an event with the provided details and assigns tasks to specified assignees.
+ * 
+ * @param {Object} eventRequest - The request object containing event details and tasks.
+ * @param {Object} eventResponse - The response object to send back the event creation status.
+ * @returns {Object} - Returns a success message along with the created event or an error message.
+ */
+exports.createEvent = async (eventRequest, eventResponse) => {
     try {
-        const { eventName, eventType, date, venue, description, availableSlots, ticketPrice, team, tasks , totalBudget} = req.body;
+        // Destructure event details from the request body
+        const { eventName, eventType, date, venue, description, availableSlots, ticketPrice, team, tasks, totalBudget } = eventRequest.body;
 
+        // Validate if team is provided for team-specific events
         if (eventType.toLowerCase() === "team-specific" && !team) {
-            return res.status(400).json({ error: "Team is required for team-specific events." });
+            return eventResponse.status(400).json({ error: "Team is required for team-specific events." });
         }
 
+        // Ensure at least one task is provided
         if (!Array.isArray(tasks) || tasks.length === 0) {
-            return res.status(400).json({ error: "At least one task must be assigned to create an event." });
+            return eventResponse.status(400).json({ error: "At least one task must be assigned to create an event." });
         }
 
-        // Get the creator from authenticated user
-        const creatorEmail = req.user.email;
+        // Get the creator's email from the authenticated user
+        const creatorEmail = eventRequest.user.email;
 
-        // Create the event and get its ID
+        // Create the event object
         const event = new Event({
             eventName,
             eventType,
@@ -30,18 +41,20 @@ exports.createEvent = async (req, res) => {
             availableSlots,
             ticketPrice,
             team: eventType.toLowerCase() === "team-specific" ? team : "",
-            isPaid: eventType.toLowerCase() === "limited-entry",
+            isPaid: eventType.toLowerCase() === "limited-entry", // Set isPaid flag if event is limited-entry
             creator: creatorEmail,
-            totalBudget: totalBudget || 0, // If not provided, default to 0
+            totalBudget: totalBudget || 0, // Default totalBudget to 0 if not provided
         });
 
+        // Save the event to the database
         await event.save();
         console.log("Event created successfully with ID:", event._id);
 
-        // Save tasks with eventID and assigner
+        // Create tasks and assign them to the event
         const taskPromises = tasks.map(async (task) => {
             const { taskName, description, deadline, budget, assignee } = task;
 
+            // Create a new task for the event
             const newTask = new Task({
                 taskName,
                 description,
@@ -53,10 +66,11 @@ exports.createEvent = async (req, res) => {
                 eventID: event._id, // Link the task to the created event
             });
 
+            // Save the task to the database
             await newTask.save();
             console.log("Task created for event:", eventName);
 
-            // Send email notification
+            // Send email notification to the assignee
             const employee = await Employee.findOne({ email: assignee });
             if (employee) {
                 const emailText = `Dear ${employee.name},
@@ -72,54 +86,68 @@ We kindly request that you review the task details and take the necessary action
 Best regards,
 Orchestrate`;
 
+                // Send email using the sendEmail service
                 return sendEmail(assignee, `New Task Assigned: ${eventName}`, emailText);
             }
         });
 
+        // Wait for all task creation and email notifications to complete
         await Promise.all(taskPromises);
 
-        res.status(201).json({ message: "Event created and tasks assigned successfully", event });
+        // Respond with a success message
+        eventResponse.status(201).json({ message: "Event created and tasks assigned successfully", event });
     } catch (error) {
+        // Log and handle any errors
         console.error("Error creating event:", error.message);
-        res.status(500).json({ error: error.message });
+        eventResponse.status(500).json({ error: error.message });
     }
 };
 
-
-// Get All Events
-exports.getEvents = async (req, res) => {
+/**
+ * Controller to get all events.
+ * This function fetches and returns a list of all events in the system.
+ * 
+ * @param {Object} eventRequest - The request object.
+ * @param {Object} eventResponse - The response object to send back the list of events.
+ * @returns {Object} - Returns a list of all events or an error message.
+ */
+exports.getEvents = async (eventRequest, eventResponse) => {
     try {
-        const events = await Event.find(); // Fetch all events
-        res.status(200).json(events);
+        // Fetch all events from the database
+        const events = await Event.find();
+
+        // Return the events as a JSON response
+        eventResponse.status(200).json(events);
     } catch (error) {
+        // Log and handle any errors
         console.error("Error fetching events:", error);
-        res.status(500).json({ message: "Server error: " + error.message });
+        eventResponse.status(500).json({ message: "Server error: " + error.message });
     }
 };
 
 // RSVP to an Event (Only for Unpaid Events)
-exports.confirmRSVP = async (req, res) => {
-    const { eventId, employeeName } = req.body;
+exports.confirmRSVP = async (eventRequest, eventResponse) => {
+    const { eventId, employeeName } = eventRequest.body;
 
     try {
         const event = await Event.findById(eventId);
-        if (!event) return res.status(404).json({ message: "Event not found" });
+        if (!event) return eventResponse.status(404).json({ message: "Event not found" });
 
         if (event.eventType !== "limited-entry") {
-            return res.status(400).json({ message: "RSVP not allowed for this event type" });
+            return eventResponse.status(400).json({ message: "RSVP not allowed for this event type" });
         }
 
         // Check if the event is unpaid (ticketPrice should be null or 0)
         if (event.ticketPrice !== null && event.ticketPrice > 0) {
-            return res.status(400).json({ message: "RSVP is only allowed for unpaid events." });
+            return eventResponse.status(400).json({ message: "RSVP is only allowed for unpaid events." });
         }
 
         if (event.attendees.includes(employeeName)) {
-            return res.status(400).json({ message: "You have already RSVP’d for this event." });
+            return eventResponse.status(400).json({ message: "You have already RSVP’d for this event." });
         }
 
         if (event.availableSlots !== null && event.availableSlots === 0) {
-            return res.status(400).json({ message: "No slots available" });
+            return eventResponse.status(400).json({ message: "No slots available" });
         }
 
         // Mark RSVP successful
@@ -132,32 +160,32 @@ exports.confirmRSVP = async (req, res) => {
             { new: true }
         );
 
-        res.status(200).json({ message: "RSVP successful", availableSlots: updatedEvent.availableSlots });
+        eventResponse.status(200).json({ message: "RSVP successful", availableSlots: updatedEvent.availableSlots });
     } catch (error) {
         console.error("RSVP Error:", error.message);
-        res.status(500).json({ message: "Server error: " + error.message });
+        eventResponse.status(500).json({ message: "Server error: " + error.message });
     }
 };
 
 // Un-RSVP from an Event (Only for Unpaid Events)
-exports.unRSVP = async (req, res) => {
-    const { eventId, employeeName } = req.body;
+exports.unRSVP = async (eventRequest, eventResponse) => {
+    const { eventId, employeeName } = eventRequest.body;
 
     try {
         const event = await Event.findById(eventId);
-        if (!event) return res.status(404).json({ message: "Event not found" });
+        if (!event) return eventResponse.status(404).json({ message: "Event not found" });
 
         if (event.eventType !== "limited-entry") {
-            return res.status(400).json({ message: "Un-RSVP not allowed for this event type" });
+            return eventResponse.status(400).json({ message: "Un-RSVP not allowed for this event type" });
         }
 
         // Check if the event is unpaid (ticketPrice should be null or 0)
         if (event.ticketPrice !== null && event.ticketPrice > 0) {
-            return res.status(400).json({ message: "Un-RSVP is only allowed for unpaid events." });
+            return eventResponse.status(400).json({ message: "Un-RSVP is only allowed for unpaid events." });
         }
 
         if (!event.attendees.includes(employeeName)) {
-            return res.status(400).json({ message: "You have not RSVP'd for this event." });
+            return eventResponse.status(400).json({ message: "You have not RSVP'd for this event." });
         }
 
         // Remove the employee from the attendees list and increase available slots
@@ -170,16 +198,16 @@ exports.unRSVP = async (req, res) => {
             { new: true }
         );
 
-        res.status(200).json({ message: "RSVP cancelled successfully", availableSlots: updatedEvent.availableSlots });
+        eventResponse.status(200).json({ message: "RSVP cancelled successfully", availableSlots: updatedEvent.availableSlots });
     } catch (error) {
         console.error("Un-RSVP Error:", error.message);
-        res.status(500).json({ message: "Server error: " + error.message });
+        eventResponse.status(500).json({ message: "Server error: " + error.message });
     }
 };
 
-exports.getDetailedReport = async (req, res) => {
+exports.getDetailedReport = async (eventRequest, eventResponse) => {
   try {
-    const { eventName, year, team } = req.query;
+    const { eventName, year, team } = eventRequest.query;
     const query = {};
 
     // Apply query filters
@@ -253,17 +281,17 @@ exports.getDetailedReport = async (req, res) => {
       }
     }));
 
-    res.status(200).json(reportData.filter(data => data !== null));
+    eventResponse.status(200).json(reportData.filter(data => data !== null));
   } catch (error) {
     console.error("Error generating detailed report:", error.message);
-    res.status(500).json({ error: error.message });
+    eventResponse.status(500).json({ error: error.message });
   }
 };
 
 // Get Compiled Event Report
-exports.getCompiledReport = async (req, res) => {
+exports.getCompiledReport = async (eventRequest, eventResponse) => {
     try {
-      const { eventName, year, team, eventType } = req.query;
+      const { eventName, year, team, eventType } = eventRequestquery;
       const query = {};
   
       // Dynamically apply filters
@@ -281,7 +309,7 @@ exports.getCompiledReport = async (req, res) => {
         const endOfYear = new Date(`${year}-12-31T23:59:59.999Z`);
         query.date = { $gte: startOfYear, $lte: endOfYear };
       } else if (year) {
-        return res.status(400).json({ error: "Invalid year format. Please provide a 4-digit year." });
+        return eventResponse.status(400).json({ error: "Invalid year format. Please provide a 4-digit year." });
       }
   
       console.log("Generated Query:", query);
@@ -290,7 +318,7 @@ exports.getCompiledReport = async (req, res) => {
       const events = await Event.find(query);
   
       if (!events || events.length === 0) {
-        return res.status(404).json({ message: "No events found with the specified criteria." });
+        return eventResponse.status(404).json({ message: "No events found with the specified criteria." });
       }
   
       // Generate reports for each matching event using totalBudget directly from events
@@ -305,10 +333,10 @@ exports.getCompiledReport = async (req, res) => {
         totalBudget: event.totalBudget || 0,
       }));
   
-      res.status(200).json(reportData);
+      eventResponse.status(200).json(reportData);
     } catch (error) {
       console.error("Error generating compiled report:", error.message);
-      res.status(500).json({ error: error.message });
+      eventResponse.status(500).json({ error: error.message });
     }
   };
   

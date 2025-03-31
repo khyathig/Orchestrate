@@ -86,9 +86,10 @@ function EventFeed({ loggedInUser }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ employeeName: loggedInUser.name }),
+        body: JSON.stringify({ eventId: event._id, employeeName: loggedInUser.name }),
       });
-
+      console.log("RSVP Request:", { eventId: event._id, employeeName: loggedInUser.name });
+      
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Failed to update RSVP status");
 

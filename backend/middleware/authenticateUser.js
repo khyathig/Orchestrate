@@ -4,36 +4,44 @@ const Employee = require("../models/Employee");
 // Ensure JWT secret exists
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret";
 
-const authenticateUser = async (req, res, next) => {
+/**
+ * Middleware to authenticate users via JWT.
+ * @param {Object} authRequest - The request object containing headers and cookies.
+ * @param {Object} authResponse - The response object to send authentication errors.
+ * @param {Function} nextMiddleware - The next function to continue request processing.
+ */
+const authenticateUser = async (authRequest, authResponse, nextMiddleware) => {
   try {
-    const token = req.cookies?.token || req.header("Authorization")?.replace("Bearer ", "");
+    const token =
+      authRequest.cookies?.token ||
+      authRequest.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
-      return res.status(401).json({ error: "Unauthorized: No token provided." });
+      return authResponse.status(401).json({ error: "Unauthorized: No token provided." });
     }
 
     // Verify token
     const decoded = jwt.verify(token, JWT_SECRET);
 
     // Find the user based on the decoded token's ID
-    const user = await Employee.findById(decoded.id);
-    if (!user) {
-      return res.status(401).json({ error: "Unauthorized: User not found." });
+    const authenticatedUser = await Employee.findById(decoded.id);
+    if (!authenticatedUser) {
+      return authResponse.status(401).json({ error: "Unauthorized: User not found." });
     }
 
     // Attach user data to request object
-    req.user = {
-      id: user._id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-      team: user.team
+    authRequest.user = {
+      id: authenticatedUser._id,
+      email: authenticatedUser.email,
+      name: authenticatedUser.name,
+      role: authenticatedUser.role,
+      team: authenticatedUser.team,
     };
 
-    next();
+    nextMiddleware();
   } catch (error) {
     console.error("Authentication Error:", error.message);
-    res.status(401).json({ error: "Unauthorized: Invalid or expired token." });
+    authResponse.status(401).json({ error: "Unauthorized: Invalid or expired token." });
   }
 };
 

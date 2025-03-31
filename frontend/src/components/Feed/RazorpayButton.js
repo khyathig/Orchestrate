@@ -28,11 +28,11 @@ const RazorpayButton = ({ event, loggedInUser }) => {
     const handlePayment = async () => {
         try {
              // Create order by making a POST request to the backend
-            const response = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
+             const response = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: event.ticketPrice }), // Send the ticket price
-            });
+                body: JSON.stringify({ amount: event.ticketPrice }), // Ensure correct conversion
+            });            
 
             const order = await response.json();// Parse the order details
 
