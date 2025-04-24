@@ -19,7 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.0",
     "razorpay": "^2.9.6",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "socket.io": "^4.8.1"
   }
 }
